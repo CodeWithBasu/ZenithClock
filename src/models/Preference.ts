@@ -1,6 +1,15 @@
-import mongoose from 'mongoose';
+import mongoose, { Document, Model, Schema } from 'mongoose';
 
-const PreferenceSchema = new mongoose.Schema(
+export interface IPreference extends Document {
+  userId: string;
+  theme: string;
+  clockFormat: string;
+  defaultAlarmTone: string;
+  ambientSound: string;
+  pinnedCities: string[];
+}
+
+const PreferenceSchema: Schema = new mongoose.Schema(
   {
     userId: { type: String, default: 'default_user' },
     theme: { type: String, default: 'cyber' }, // 'cyber', 'aurora', 'obsidian', 'minimal', 'sunburst'
@@ -12,4 +21,4 @@ const PreferenceSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.Preference || mongoose.model('Preference', PreferenceSchema);
+export default (mongoose.models.Preference as Model<IPreference>) || mongoose.model<IPreference>('Preference', PreferenceSchema);
