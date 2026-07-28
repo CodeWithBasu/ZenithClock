@@ -2,14 +2,19 @@
 
 import { useEffect, useRef } from 'react';
 
-export default function DynamicBackground({ theme = 'cyber' }) {
-  const canvasRef = useRef(null);
+interface DynamicBackgroundProps {
+  theme?: string;
+}
+
+export default function DynamicBackground({ theme = 'cyber' }: DynamicBackgroundProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let animationFrameId;
+    if (!ctx) return;
+    let animationFrameId: number;
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
