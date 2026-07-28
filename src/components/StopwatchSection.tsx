@@ -4,26 +4,35 @@ import { useState, useEffect, useRef } from 'react';
 import { TimerReset, Play, Pause, RotateCcw, Flag, Download, Award, TrendingUp, Sparkles } from 'lucide-react';
 import { audioSynth } from '@/lib/audioSynth';
 
+interface LapData {
+  id: number;
+  lapMs: number;
+  totalMs: number;
+  timestamp: string;
+}
+
 export default function StopwatchSection() {
   const [timeMs, setTimeMs] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [laps, setLaps] = useState([]);
-  const requestRef = useRef();
-  const startTimeRef = useRef();
+  const [laps, setLaps] = useState<LapData[]>([]);
+  const requestRef = useRef<number>();
+  const startTimeRef = useRef<number>();
 
   useEffect(() => {
     if (isRunning) {
       startTimeRef.current = Date.now() - timeMs;
       const update = () => {
-        setTimeMs(Date.now() - startTimeRef.current);
+        setTimeMs(Date.now() - (startTimeRef.current || 0));
         requestRef.current = requestAnimationFrame(update);
       };
       requestRef.current = requestAnimationFrame(update);
     } else {
-      cancelAnimationFrame(requestRef.current);
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
     }
-    return () => cancelAnimationFrame(requestRef.current);
-  }, [isRunning]);
+    return () => {
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+    };
+  }, [isRunning, timeMs]);
 
   const toggleStartPause = () => {
     audioSynth.playClick();
@@ -44,7 +53,7 @@ export default function StopwatchSection() {
     const previousTotal = laps.length > 0 ? laps[0].totalMs : 0;
     const lapDuration = timeMs - previousTotal;
 
-    const newLap = {
+    const newLap: LapData = {
       id: laps.length + 1,
       lapMs: lapDuration,
       totalMs: timeMs,
@@ -54,7 +63,7 @@ export default function StopwatchSection() {
     setLaps([newLap, ...laps]);
   };
 
-  const formatMs = (totalMs) => {
+  const formatMs = (totalMs: number) => {
     const ms = Math.floor((totalMs % 1000) / 10);
     const s = Math.floor((totalMs / 1000) % 60);
     const m = Math.floor((totalMs / (1000 * 60)) % 60);
