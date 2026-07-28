@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
 import PresetTimer from '@/models/PresetTimer';
 
@@ -10,12 +10,12 @@ export async function GET() {
     }
     const timers = await PresetTimer.find({}).sort({ createdAt: -1 });
     return NextResponse.json({ success: true, data: timers });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
 
-export async function POST(req) {
+export async function POST(req: NextRequest) {
   try {
     const conn = await dbConnect();
     if (!conn) {
@@ -24,12 +24,12 @@ export async function POST(req) {
     const body = await req.json();
     const timer = await PresetTimer.create(body);
     return NextResponse.json({ success: true, data: timer }, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
 
-export async function DELETE(req) {
+export async function DELETE(req: NextRequest) {
   try {
     const conn = await dbConnect();
     if (!conn) {
@@ -39,7 +39,7 @@ export async function DELETE(req) {
     const id = searchParams.get('id');
     await PresetTimer.findByIdAndDelete(id);
     return NextResponse.json({ success: true, id });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
