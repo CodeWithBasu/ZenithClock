@@ -42,8 +42,8 @@ export default function DynamicBackground({ theme = 'cyber' }: DynamicBackground
       ctx.clearRect(0, 0, width, height);
 
       // Theme background base
-      let grad1 = '#090d16';
-      let grad2 = '#04060a';
+      let grad1 = '#000000';
+      let grad2 = '#000000';
       let particleColor = '0, 243, 255'; // Cyan neon
 
       if (theme === 'aurora') {
