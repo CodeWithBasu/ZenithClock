@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
 import Preference from '@/models/Preference';
 
@@ -13,12 +13,12 @@ export async function GET() {
       pref = await Preference.create({ userId: 'default_user' });
     }
     return NextResponse.json({ success: true, data: pref });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
 
-export async function POST(req) {
+export async function POST(req: NextRequest) {
   try {
     const conn = await dbConnect();
     if (!conn) {
@@ -31,7 +31,7 @@ export async function POST(req) {
       { new: true, upsert: true }
     );
     return NextResponse.json({ success: true, data: pref });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
