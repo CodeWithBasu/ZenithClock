@@ -1,5 +1,14 @@
-// Comprehensive list of major world cities with IANA timezones, coordinates, and region codes
-export const WORLD_CITIES = [
+export interface WorldCity {
+  city: string;
+  country: string;
+  timezone: string;
+  flag: string;
+  lat: number;
+  lng: number;
+  region: string;
+}
+
+export const WORLD_CITIES: WorldCity[] = [
   { city: 'Tokyo', country: 'Japan', timezone: 'Asia/Tokyo', flag: '🇯🇵', lat: 35.6762, lng: 139.6503, region: 'Asia-Pacific' },
   { city: 'New York', country: 'United States', timezone: 'America/New_York', flag: '🇺🇸', lat: 40.7128, lng: -74.0060, region: 'Americas' },
   { city: 'London', country: 'United Kingdom', timezone: 'Europe/London', flag: '🇬🇧', lat: 51.5074, lng: -0.1278, region: 'Europe' },
@@ -32,7 +41,16 @@ export const WORLD_CITIES = [
   { city: 'Stockholm', country: 'Sweden', timezone: 'Europe/Stockholm', flag: '🇸🇪', lat: 59.3293, lng: 18.0686, region: 'Europe' }
 ];
 
-export function getCityTime(timezone) {
+export interface CityTime {
+  formatted: string;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  offset: string;
+  isNight: boolean;
+}
+
+export function getCityTime(timezone: string): CityTime {
   try {
     const now = new Date();
     const formatter = new Intl.DateTimeFormat('en-US', {
@@ -51,7 +69,7 @@ export function getCityTime(timezone) {
     const dateStr = now.toLocaleString('en-US', { timeZone: timezone });
     const localDate = new Date(dateStr);
     const utcDate = new Date(now.toLocaleString('en-US', { timeZone: 'UTC' }));
-    const offsetHours = Math.round((localDate - utcDate) / (1000 * 60 * 60));
+    const offsetHours = Math.round((localDate.getTime() - utcDate.getTime()) / (1000 * 60 * 60));
     
     return {
       formatted: `${hours}:${minutes}:${seconds}`,
