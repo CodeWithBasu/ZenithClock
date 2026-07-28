@@ -2,18 +2,23 @@
 
 import { useState, useEffect } from 'react';
 import { Globe, Search, Pin, PinOff, Sun, Moon, Sliders, MapPin } from 'lucide-react';
-import { WORLD_CITIES, getCityTime } from '@/lib/timezones';
+import { WORLD_CITIES, getCityTime, CityTime } from '@/lib/timezones';
 
-export default function WorldTimeSection({ pinnedCities, setPinnedCities }) {
+interface WorldTimeSectionProps {
+  pinnedCities: string[];
+  setPinnedCities: (cities: string[]) => void;
+}
+
+export default function WorldTimeSection({ pinnedCities, setPinnedCities }: WorldTimeSectionProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('All');
   const [converterHour, setConverterHour] = useState(new Date().getHours());
   const [showConverter, setShowConverter] = useState(false);
-  const [times, setTimes] = useState({});
+  const [times, setTimes] = useState<Record<string, CityTime>>({});
 
   useEffect(() => {
     const updateTimes = () => {
-      const updated = {};
+      const updated: Record<string, CityTime> = {};
       WORLD_CITIES.forEach((cityObj) => {
         updated[cityObj.city] = getCityTime(cityObj.timezone);
       });
@@ -25,7 +30,7 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }) {
     return () => clearInterval(interval);
   }, []);
 
-  const togglePin = (cityName) => {
+  const togglePin = (cityName: string) => {
     if (pinnedCities.includes(cityName)) {
       setPinnedCities(pinnedCities.filter((c) => c !== cityName));
     } else {
