@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
 import Alarm from '@/models/Alarm';
 
@@ -10,12 +10,12 @@ export async function GET() {
     }
     const alarms = await Alarm.find({}).sort({ time: 1 });
     return NextResponse.json({ success: true, data: alarms });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
 
-export async function POST(req) {
+export async function POST(req: NextRequest) {
   try {
     const conn = await dbConnect();
     if (!conn) {
@@ -24,12 +24,12 @@ export async function POST(req) {
     const body = await req.json();
     const alarm = await Alarm.create(body);
     return NextResponse.json({ success: true, data: alarm }, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
 
-export async function PUT(req) {
+export async function PUT(req: NextRequest) {
   try {
     const conn = await dbConnect();
     if (!conn) {
@@ -38,12 +38,12 @@ export async function PUT(req) {
     const { id, ...updates } = await req.json();
     const alarm = await Alarm.findByIdAndUpdate(id, updates, { new: true });
     return NextResponse.json({ success: true, data: alarm });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
 
-export async function DELETE(req) {
+export async function DELETE(req: NextRequest) {
   try {
     const conn = await dbConnect();
     if (!conn) {
@@ -53,7 +53,7 @@ export async function DELETE(req) {
     const id = searchParams.get('id');
     await Alarm.findByIdAndDelete(id);
     return NextResponse.json({ success: true, id });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
