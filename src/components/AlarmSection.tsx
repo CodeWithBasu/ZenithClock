@@ -4,17 +4,38 @@ import { useState, useEffect } from 'react';
 import { AlarmClock, Plus, Trash2, Bell, BellOff, Volume2, ShieldAlert, Check, RefreshCw } from 'lucide-react';
 import { audioSynth } from '@/lib/audioSynth';
 
-export default function AlarmSection({ alarms, setAlarms }) {
+export interface AlarmType {
+  id: string;
+  time: string;
+  label: string;
+  days: string[];
+  enabled: boolean;
+  tone: string;
+  challenge: string;
+}
+
+interface MathProblem {
+  n1: number;
+  n2: number;
+  answer: number;
+}
+
+interface AlarmSectionProps {
+  alarms: AlarmType[];
+  setAlarms: (alarms: AlarmType[]) => void;
+}
+
+export default function AlarmSection({ alarms, setAlarms }: AlarmSectionProps) {
   const [showAddModal, setShowAddModal] = useState(false);
   const [timeInput, setTimeInput] = useState('07:00');
   const [labelInput, setLabelInput] = useState('Morning Wakeup');
-  const [selectedDays, setSelectedDays] = useState(['Mon', 'Tue', 'Wed', 'Thu', 'Fri']);
+  const [selectedDays, setSelectedDays] = useState<string[]>(['Mon', 'Tue', 'Wed', 'Thu', 'Fri']);
   const [toneInput, setToneInput] = useState('radar');
   const [challengeInput, setChallengeInput] = useState('none');
 
   // Active Alarm Trigger state
-  const [ringingAlarm, setRingingAlarm] = useState(null);
-  const [mathProblem, setMathProblem] = useState(null);
+  const [ringingAlarm, setRingingAlarm] = useState<AlarmType | null>(null);
+  const [mathProblem, setMathProblem] = useState<MathProblem | null>(null);
   const [mathAnswerInput, setMathAnswerInput] = useState('');
   const [mathError, setMathError] = useState(false);
 
@@ -42,7 +63,7 @@ export default function AlarmSection({ alarms, setAlarms }) {
     return () => clearInterval(interval);
   }, [alarms]);
 
-  const triggerAlarm = (alarm) => {
+  const triggerAlarm = (alarm: AlarmType) => {
     setRingingAlarm(alarm);
     audioSynth.playTone(alarm.tone, 0.9);
 
@@ -60,7 +81,7 @@ export default function AlarmSection({ alarms, setAlarms }) {
   };
 
   const handleAddAlarm = () => {
-    const newAlarm = {
+    const newAlarm: AlarmType = {
       id: Date.now().toString(),
       time: timeInput,
       label: labelInput || 'Alarm',
@@ -81,19 +102,21 @@ export default function AlarmSection({ alarms, setAlarms }) {
     }).catch(() => {});
   };
 
-  const toggleAlarm = (id) => {
+  const toggleAlarm = (id: string) => {
     const updated = alarms.map((a) => (a.id === id ? { ...a, enabled: !a.enabled } : a));
     setAlarms(updated);
 
     const target = updated.find((a) => a.id === id);
-    fetch('/api/alarms', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, enabled: target.enabled }),
-    }).catch(() => {});
+    if (target) {
+      fetch('/api/alarms', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, enabled: target.enabled }),
+      }).catch(() => {});
+    }
   };
 
-  const deleteAlarm = (id) => {
+  const deleteAlarm = (id: string) => {
     const updated = alarms.filter((a) => a.id !== id);
     setAlarms(updated);
 
