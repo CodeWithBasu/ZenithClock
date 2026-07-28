@@ -5,8 +5,17 @@ import { Timer, Play, Pause, RotateCcw, Plus, Trash2, CheckCircle2, Sparkles, Co
 import { audioSynth } from '@/lib/audioSynth';
 import confetti from 'canvas-confetti';
 
+interface TimerData {
+  id: string;
+  title: string;
+  totalSeconds: number;
+  remainingSeconds: number;
+  isRunning: boolean;
+  category: string;
+}
+
 export default function TimerSection() {
-  const [timers, setTimers] = useState([
+  const [timers, setTimers] = useState<TimerData[]>([
     { id: '1', title: 'Pomodoro Focus', totalSeconds: 1500, remainingSeconds: 1500, isRunning: false, category: 'Focus' },
     { id: '2', title: 'Power Nap', totalSeconds: 600, remainingSeconds: 600, isRunning: false, category: 'Rest' },
   ]);
@@ -39,21 +48,21 @@ export default function TimerSection() {
     return () => clearInterval(interval);
   }, []);
 
-  const toggleTimer = (id) => {
+  const toggleTimer = (id: string) => {
     audioSynth.playClick();
     setTimers((prev) =>
       prev.map((t) => (t.id === id ? { ...t, isRunning: !t.isRunning } : t))
     );
   };
 
-  const resetTimer = (id) => {
+  const resetTimer = (id: string) => {
     audioSynth.playClick();
     setTimers((prev) =>
       prev.map((t) => (t.id === id ? { ...t, remainingSeconds: t.totalSeconds, isRunning: false } : t))
     );
   };
 
-  const deleteTimer = (id) => {
+  const deleteTimer = (id: string) => {
     setTimers((prev) => prev.filter((t) => t.id !== id));
   };
 
@@ -61,7 +70,7 @@ export default function TimerSection() {
     const totalSecs = customHours * 3600 + customMins * 60 + customSecs;
     if (totalSecs <= 0) return;
 
-    const newT = {
+    const newT: TimerData = {
       id: Date.now().toString(),
       title: customTitle || 'Timer',
       totalSeconds: totalSecs,
@@ -74,9 +83,9 @@ export default function TimerSection() {
     setShowAddModal(false);
   };
 
-  const addPreset = (title, minutes, category) => {
+  const addPreset = (title: string, minutes: number, category: string) => {
     const totalSecs = minutes * 60;
-    const newT = {
+    const newT: TimerData = {
       id: Date.now().toString(),
       title,
       totalSeconds: totalSecs,
@@ -87,7 +96,7 @@ export default function TimerSection() {
     setTimers([newT, ...timers]);
   };
 
-  const formatSeconds = (totalSecs) => {
+  const formatSeconds = (totalSecs: number) => {
     const h = Math.floor(totalSecs / 3600);
     const m = Math.floor((totalSecs % 3600) / 60);
     const s = totalSecs % 60;
