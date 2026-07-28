@@ -1,65 +1,135 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useEffect } from 'react';
+import DynamicBackground from '@/components/DynamicBackground';
+import Header from '@/components/Header';
+import ClockSection from '@/components/ClockSection';
+import AlarmSection from '@/components/AlarmSection';
+import WorldTimeSection from '@/components/WorldTimeSection';
+import TimerSection from '@/components/TimerSection';
+import StopwatchSection from '@/components/StopwatchSection';
+import FocusPomodoro from '@/components/FocusPomodoro';
+import SettingsModal from '@/components/SettingsModal';
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState('clock');
+  const [theme, setTheme] = useState('cyber');
+  const [format12h, setFormat12h] = useState(true);
+  const [ambientSound, setAmbientSound] = useState('none');
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  // Alarms State
+  const [alarms, setAlarms] = useState([
+    {
+      id: '1',
+      time: '07:30',
+      label: 'Morning Rise & Shine',
+      days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+      enabled: true,
+      tone: 'radar',
+      challenge: 'math',
+    },
+    {
+      id: '2',
+      time: '22:00',
+      label: 'Wind Down Bedtime',
+      days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      enabled: false,
+      tone: 'chime',
+      challenge: 'none',
+    },
+  ]);
+
+  // Pinned Cities State
+  const [pinnedCities, setPinnedCities] = useState(['Tokyo', 'New York', 'London', 'Mumbai']);
+
+  // Fetch initial preferences & alarms from API or LocalStorage
+  useEffect(() => {
+    // LocalStorage load
+    const savedAlarms = localStorage.getItem('chronopulse_alarms');
+    if (savedAlarms) {
+      try {
+        setAlarms(JSON.parse(savedAlarms));
+      } catch (e) {}
+    }
+
+    const savedPinned = localStorage.getItem('chronopulse_pinned');
+    if (savedPinned) {
+      try {
+        setPinnedCities(JSON.parse(savedPinned));
+      } catch (e) {}
+    }
+
+    const savedTheme = localStorage.getItem('chronopulse_theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+
+    // Attempt MongoDB Sync fetch
+    fetch('/api/alarms')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.data && data.data.length > 0) {
+          setAlarms(data.data.map((a) => ({ ...a, id: a._id || a.id })));
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  // Save to LocalStorage on change
+  useEffect(() => {
+    localStorage.setItem('chronopulse_alarms', JSON.stringify(alarms));
+  }, [alarms]);
+
+  useEffect(() => {
+    localStorage.setItem('chronopulse_pinned', JSON.stringify(pinnedCities));
+  }, [pinnedCities]);
+
+  useEffect(() => {
+    localStorage.setItem('chronopulse_theme', theme);
+  }, [theme]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="min-h-screen text-slate-100 relative font-sans selection:bg-cyan-500 selection:text-white pb-16">
+      {/* HTML5 Canvas Ambient Particle Background */}
+      <DynamicBackground theme={theme} />
+
+      {/* Main Header Bar */}
+      <Header
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        theme={theme}
+        setTheme={setTheme}
+        ambientSound={ambientSound}
+        setAmbientSound={setAmbientSound}
+        onOpenSettings={() => setIsSettingsOpen(true)}
+      />
+
+      {/* Content Container */}
+      <div className="max-w-7xl mx-auto px-4 pt-8">
+        {activeTab === 'clock' && (
+          <ClockSection format12h={format12h} setFormat12h={setFormat12h} />
+        )}
+        {activeTab === 'alarm' && (
+          <AlarmSection alarms={alarms} setAlarms={setAlarms} />
+        )}
+        {activeTab === 'world' && (
+          <WorldTimeSection pinnedCities={pinnedCities} setPinnedCities={setPinnedCities} />
+        )}
+        {activeTab === 'timer' && <TimerSection />}
+        {activeTab === 'stopwatch' && <StopwatchSection />}
+        {activeTab === 'focus' && (
+          <FocusPomodoro ambientSound={ambientSound} setAmbientSound={setAmbientSound} />
+        )}
+      </div>
+
+      {/* MongoDB & Audio Settings Modal */}
+      <SettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        theme={theme}
+        setTheme={setTheme}
+      />
+    </main>
   );
 }
