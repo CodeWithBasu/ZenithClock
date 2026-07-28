@@ -3,9 +3,14 @@
 import { useState, useEffect } from 'react';
 import { Moon, Sun, CloudRain, Calendar, Clock as ClockIcon, Sparkles, BedDouble } from 'lucide-react';
 
-export default function ClockSection({ format12h, setFormat12h }) {
+interface ClockSectionProps {
+  format12h: boolean;
+  setFormat12h: (val: boolean) => void;
+}
+
+export default function ClockSection({ format12h, setFormat12h }: ClockSectionProps) {
   const [time, setTime] = useState(new Date());
-  const [clockType, setClockType] = useState('both'); // 'digital', 'analog', 'both'
+  const [clockType, setClockType] = useState<string>('both'); // 'digital', 'analog', 'both'
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
