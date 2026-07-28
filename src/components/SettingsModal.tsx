@@ -4,7 +4,14 @@ import { useState } from 'react';
 import { X, Database, Volume2, Sparkles, Check, Copy } from 'lucide-react';
 import { audioSynth } from '@/lib/audioSynth';
 
-export default function SettingsModal({ isOpen, onClose, theme, setTheme }) {
+interface SettingsModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  theme?: string;
+  setTheme?: (theme: string) => void;
+}
+
+export default function SettingsModal({ isOpen, onClose, theme, setTheme }: SettingsModalProps) {
   const [copied, setCopied] = useState(false);
 
   if (!isOpen) return null;
@@ -17,7 +24,7 @@ export default function SettingsModal({ isOpen, onClose, theme, setTheme }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const testAudio = (tone) => {
+  const testAudio = (tone: string) => {
     audioSynth.playTone(tone, 0.8);
   };
 
