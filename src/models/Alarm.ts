@@ -1,6 +1,16 @@
-import mongoose from 'mongoose';
+import mongoose, { Document, Model, Schema } from 'mongoose';
 
-const AlarmSchema = new mongoose.Schema(
+export interface IAlarm extends Document {
+  time: string;
+  label: string;
+  days: string[];
+  enabled: boolean;
+  tone: string;
+  challenge: string;
+  snoozeMinutes: number;
+}
+
+const AlarmSchema: Schema = new mongoose.Schema(
   {
     time: { type: String, required: true }, // "HH:MM"
     label: { type: String, default: 'Alarm' },
@@ -13,4 +23,4 @@ const AlarmSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.Alarm || mongoose.model('Alarm', AlarmSchema);
+export default (mongoose.models.Alarm as Model<IAlarm>) || mongoose.model<IAlarm>('Alarm', AlarmSchema);
