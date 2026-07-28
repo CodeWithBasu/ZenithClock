@@ -9,17 +9,22 @@ interface ClockSectionProps {
 }
 
 export default function ClockSection({ format12h, setFormat12h }: ClockSectionProps) {
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState<Date | null>(null);
   const [clockType, setClockType] = useState<string>('both'); // 'digital', 'analog', 'both'
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    setTime(new Date());
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  const hours = time.getHours();
-  const minutes = time.getMinutes();
-  const seconds = time.getSeconds();
+  const renderTime = time || new Date('2024-01-01T00:00:00');
+
+  const hours = renderTime.getHours();
+  const minutes = renderTime.getMinutes();
+  const seconds = renderTime.getSeconds();
 
   // Analog Clock angles
   const secondDeg = seconds * 6;
@@ -32,7 +37,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
 
   // Bedtime Calculator (REM 90-min cycles)
   const calculateSleepCycles = () => {
-    const now = new Date(time);
+    const now = new Date(renderTime);
     now.setMinutes(now.getMinutes() + 14); // 14 mins average to fall asleep
     const cycles = [3, 4, 5, 6]; // 4.5h, 6h, 7.5h, 9h
     return cycles.map((c) => {
@@ -40,7 +45,9 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
       return {
         cycles: c,
         hours: (c * 1.5).toFixed(1),
-        time: wakeTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        time: mounted 
+          ? wakeTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          : '--:--', // Avoid hydration mismatch on toLocaleTimeString which is locale dependent
       };
     });
   };
@@ -53,12 +60,14 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
   const displaySeconds = seconds.toString().padStart(2, '0');
   const ampm = hours >= 12 ? 'PM' : 'AM';
 
-  const dateString = time.toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  const dateString = mounted
+    ? renderTime.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      })
+    : 'Loading...';
 
   const isNight = hours < 6 || hours >= 19;
 

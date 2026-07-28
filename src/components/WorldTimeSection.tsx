@@ -12,11 +12,14 @@ interface WorldTimeSectionProps {
 export default function WorldTimeSection({ pinnedCities, setPinnedCities }: WorldTimeSectionProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('All');
-  const [converterHour, setConverterHour] = useState(new Date().getHours());
+  const [converterHour, setConverterHour] = useState(12);
   const [showConverter, setShowConverter] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [times, setTimes] = useState<Record<string, CityTime>>({});
 
   useEffect(() => {
+    setMounted(true);
+    setConverterHour(new Date().getHours());
     const updateTimes = () => {
       const updated: Record<string, CityTime> = {};
       WORLD_CITIES.forEach((cityObj) => {
