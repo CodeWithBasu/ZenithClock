@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import DynamicBackground from '@/components/DynamicBackground';
 import Header from '@/components/Header';
 import ClockSection from '@/components/ClockSection';
-import AlarmSection from '@/components/AlarmSection';
+import AlarmSection, { AlarmType } from '@/components/AlarmSection';
 import WorldTimeSection from '@/components/WorldTimeSection';
 import TimerSection from '@/components/TimerSection';
 import StopwatchSection from '@/components/StopwatchSection';
@@ -19,7 +19,7 @@ export default function Home() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   // Alarms State
-  const [alarms, setAlarms] = useState([
+  const [alarms, setAlarms] = useState<AlarmType[]>([
     {
       id: '1',
       time: '07:30',
@@ -41,7 +41,7 @@ export default function Home() {
   ]);
 
   // Pinned Cities State
-  const [pinnedCities, setPinnedCities] = useState(['Tokyo', 'New York', 'London', 'Mumbai']);
+  const [pinnedCities, setPinnedCities] = useState<string[]>(['Tokyo', 'New York', 'London', 'Mumbai']);
 
   // Fetch initial preferences & alarms from API or LocalStorage
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function Home() {
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data && data.data.length > 0) {
-          setAlarms(data.data.map((a) => ({ ...a, id: a._id || a.id })));
+          setAlarms(data.data.map((a: any) => ({ ...a, id: a._id || a.id })));
         }
       })
       .catch(() => {});
