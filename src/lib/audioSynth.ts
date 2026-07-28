@@ -1,15 +1,19 @@
 // Web Audio API Synthesizer for Alarms, Timer Chimes, and Procedural Ambient Soundscapes
 
 class AudioSynthesizer {
+  ctx: AudioContext | null;
+  ambientSource: AudioBufferSourceNode | null;
+  ambientGain: GainNode | null;
+
   constructor() {
     this.ctx = null;
     this.ambientSource = null;
     this.ambientGain = null;
   }
 
-  init() {
+  init(): void {
     if (!this.ctx && typeof window !== 'undefined') {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
       if (AudioCtx) {
         this.ctx = new AudioCtx();
       }
@@ -20,9 +24,9 @@ class AudioSynthesizer {
   }
 
   // Play synthesized alarm tones
-  playTone(toneType = 'radar', volume = 0.8) {
+  playTone(toneType: string = 'radar', volume: number = 0.8): void {
     this.init();
-    if (!this.ctx) return null;
+    if (!this.ctx) return;
 
     const now = this.ctx.currentTime;
     const masterGain = this.ctx.createGain();
@@ -33,6 +37,7 @@ class AudioSynthesizer {
       case 'chime': {
         // Soft metallic chime
         [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+          if (!this.ctx) return;
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
           osc.type = 'sine';
@@ -97,12 +102,13 @@ class AudioSynthesizer {
   }
 
   // Play short timer completion sound
-  playCompletionSound() {
+  playCompletionSound(): void {
     this.init();
     if (!this.ctx) return;
     const now = this.ctx.currentTime;
     const notes = [440, 554.37, 659.25, 880];
     notes.forEach((freq, index) => {
+      if (!this.ctx) return;
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
       osc.type = 'sine';
@@ -117,7 +123,7 @@ class AudioSynthesizer {
   }
 
   // Play short click/lap audio feedback
-  playClick() {
+  playClick(): void {
     this.init();
     if (!this.ctx) return;
     const osc = this.ctx.createOscillator();
@@ -134,7 +140,7 @@ class AudioSynthesizer {
   }
 
   // Procedural Noise Generator for Ambient Soundscapes
-  startAmbient(type = 'rain', volume = 0.4) {
+  startAmbient(type: string = 'rain', volume: number = 0.4): void {
     this.stopAmbient();
     this.init();
     if (!this.ctx) return;
@@ -186,7 +192,7 @@ class AudioSynthesizer {
     this.ambientSource = whiteNoise;
   }
 
-  stopAmbient() {
+  stopAmbient(): void {
     if (this.ambientSource) {
       try {
         this.ambientSource.stop();
@@ -196,7 +202,7 @@ class AudioSynthesizer {
     }
   }
 
-  setAmbientVolume(vol) {
+  setAmbientVolume(vol: number): void {
     if (this.ambientGain && this.ctx) {
       this.ambientGain.gain.linearRampToValueAtTime(vol, this.ctx.currentTime + 0.1);
     }
