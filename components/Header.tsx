@@ -127,44 +127,7 @@ export default function Header({
 
         {/* Controls Header */}
         <div className="flex items-center gap-2">
-          
-          {/* Theme Selector */}
-          <div className="relative group">
-            <select
-              value={theme}
-              onChange={(e) => setTheme(e.target.value)}
-              className="appearance-none bg-white/5 border border-white/10 text-white text-xs font-semibold rounded-xl px-3 py-2 pr-7 focus:outline-none focus:border-cyan-400 cursor-pointer hover:bg-white/10 transition-all"
-            >
-              {themes.map((t) => (
-                <option key={t.id} value={t.id} className="bg-slate-900 text-white">
-                  {t.label}
-                </option>
-              ))}
-            </select>
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-          </div>
 
-          {/* Ambient Soundscape Toggle */}
-          <button
-            onClick={toggleAmbientSound}
-            title={isAudioPlaying ? 'Mute Ambient Soundscape' : 'Play Ambient Soundscape'}
-            className={`p-2.5 rounded-xl border border-white/10 transition-all ${
-              isAudioPlaying
-                ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40 shadow-lg shadow-emerald-500/20 animate-pulse'
-                : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
-            }`}
-          >
-            {isAudioPlaying ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-          </button>
-
-          {/* Fullscreen Toggle */}
-          <button
-            onClick={toggleFullscreen}
-            title="Toggle Fullscreen"
-            className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
-          >
-            {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-          </button>
 
           {/* Settings Modal Toggle */}
           <button
