@@ -177,79 +177,81 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
 
             {/* SVG Analog Clock */}
             <div className="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center">
-              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
-                {/* Clock Face Circle */}
-                <circle
-                  cx="100"
-                  cy="100"
-                  r="92"
-                  className="fill-slate-950/80 stroke-white/10"
-                  strokeWidth="3"
-                />
-                <circle
-                  cx="100"
-                  cy="100"
-                  r="85"
-                  className="fill-none stroke-cyan-500/20"
-                  strokeWidth="1"
-                />
+              {mounted && (
+                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
+                  {/* Clock Face Circle */}
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="92"
+                    className="fill-slate-950/80 stroke-white/10"
+                    strokeWidth="3"
+                  />
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="85"
+                    className="fill-none stroke-cyan-500/20"
+                    strokeWidth="1"
+                  />
 
-                {/* Clock Hour Ticks */}
-                {Array.from({ length: 12 }).map((_, i) => {
-                  const angle = (i * 30 * Math.PI) / 180;
-                  const x1 = 100 + 76 * Math.cos(angle);
-                  const y1 = 100 + 76 * Math.sin(angle);
-                  const x2 = 100 + 86 * Math.cos(angle);
-                  const y2 = 100 + 86 * Math.sin(angle);
-                  return (
-                    <line
-                      key={i}
-                      x1={x1}
-                      y1={y1}
-                      x2={x2}
-                      y2={y2}
-                      className="stroke-cyan-400/70"
-                      strokeWidth={i % 3 === 0 ? "3" : "1.5"}
-                    />
-                  );
-                })}
+                  {/* Clock Hour Ticks */}
+                  {Array.from({ length: 12 }).map((_, i) => {
+                    const angle = (i * 30 * Math.PI) / 180;
+                    const x1 = 100 + 76 * Math.cos(angle);
+                    const y1 = 100 + 76 * Math.sin(angle);
+                    const x2 = 100 + 86 * Math.cos(angle);
+                    const y2 = 100 + 86 * Math.sin(angle);
+                    return (
+                      <line
+                        key={i}
+                        x1={x1}
+                        y1={y1}
+                        x2={x2}
+                        y2={y2}
+                        className="stroke-cyan-400/70"
+                        strokeWidth={i % 3 === 0 ? "3" : "1.5"}
+                      />
+                    );
+                  })}
 
-                {/* Hour Hand */}
-                <line
-                  x1="100"
-                  y1="100"
-                  x2={100 + 45 * Math.cos((hourDeg * Math.PI) / 180)}
-                  y2={100 + 45 * Math.sin((hourDeg * Math.PI) / 180)}
-                  className="stroke-white"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                />
+                  {/* Hour Hand */}
+                  <line
+                    x1="100"
+                    y1="100"
+                    x2={100 + 45 * Math.cos((hourDeg * Math.PI) / 180)}
+                    y2={100 + 45 * Math.sin((hourDeg * Math.PI) / 180)}
+                    className="stroke-white"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                  />
 
-                {/* Minute Hand */}
-                <line
-                  x1="100"
-                  y1="100"
-                  x2={100 + 65 * Math.cos((minuteDeg * Math.PI) / 180)}
-                  y2={100 + 65 * Math.sin((minuteDeg * Math.PI) / 180)}
-                  className="stroke-cyan-400"
-                  strokeWidth="3.5"
-                  strokeLinecap="round"
-                />
+                  {/* Minute Hand */}
+                  <line
+                    x1="100"
+                    y1="100"
+                    x2={100 + 65 * Math.cos((minuteDeg * Math.PI) / 180)}
+                    y2={100 + 65 * Math.sin((minuteDeg * Math.PI) / 180)}
+                    className="stroke-cyan-400"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                  />
 
-                {/* Second Hand */}
-                <line
-                  x1="100"
-                  y1="100"
-                  x2={100 + 75 * Math.cos((secondDeg * Math.PI) / 180)}
-                  y2={100 + 75 * Math.sin((secondDeg * Math.PI) / 180)}
-                  className="stroke-rose-500"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
+                  {/* Second Hand */}
+                  <line
+                    x1="100"
+                    y1="100"
+                    x2={100 + 75 * Math.cos((secondDeg * Math.PI) / 180)}
+                    y2={100 + 75 * Math.sin((secondDeg * Math.PI) / 180)}
+                    className="stroke-rose-500"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
 
-                {/* Center Pin */}
-                <circle cx="100" cy="100" r="5" className="fill-rose-500 stroke-white" strokeWidth="2" />
-              </svg>
+                  {/* Center Pin */}
+                  <circle cx="100" cy="100" r="5" className="fill-rose-500 stroke-white" strokeWidth="2" />
+                </svg>
+              )}
             </div>
           </div>
         )}
