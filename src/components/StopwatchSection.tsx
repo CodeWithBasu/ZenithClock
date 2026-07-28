@@ -15,8 +15,8 @@ export default function StopwatchSection() {
   const [timeMs, setTimeMs] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [laps, setLaps] = useState<LapData[]>([]);
-  const requestRef = useRef<number>();
-  const startTimeRef = useRef<number>();
+  const requestRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (isRunning) {
