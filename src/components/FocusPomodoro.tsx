@@ -5,8 +5,15 @@ import { Flame, Play, Pause, RotateCcw, Volume2, Sparkles, CheckCircle2, Award, 
 import { audioSynth } from '@/lib/audioSynth';
 import confetti from 'canvas-confetti';
 
-export default function FocusPomodoro({ ambientSound, setAmbientSound }) {
-  const [phase, setPhase] = useState('work'); // 'work', 'shortBreak', 'longBreak'
+interface FocusPomodoroProps {
+  ambientSound: string;
+  setAmbientSound: (sound: string) => void;
+}
+
+type PhaseType = 'work' | 'shortBreak' | 'longBreak';
+
+export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPomodoroProps) {
+  const [phase, setPhase] = useState<PhaseType>('work'); // 'work', 'shortBreak', 'longBreak'
   const [timeLeft, setTimeLeft] = useState(1500); // 25 mins
   const [isRunning, setIsRunning] = useState(false);
   const [streakCount, setStreakCount] = useState(0);
@@ -21,7 +28,7 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }) {
   const currentConfig = phaseConfigs[phase];
 
   useEffect(() => {
-    let interval = null;
+    let interval: NodeJS.Timeout | null = null;
     if (isRunning) {
       interval = setInterval(() => {
         setTimeLeft((prev) => {
@@ -33,9 +40,11 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }) {
         });
       }, 1000);
     } else {
-      clearInterval(interval);
+      if (interval) clearInterval(interval);
     }
-    return () => clearInterval(interval);
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, [isRunning, phase]);
 
   const handlePhaseComplete = () => {
@@ -58,7 +67,7 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }) {
     }
   };
 
-  const switchPhase = (newPhase) => {
+  const switchPhase = (newPhase: PhaseType) => {
     setPhase(newPhase);
     setTimeLeft(phaseConfigs[newPhase].defaultSecs);
     setIsRunning(false);
@@ -75,7 +84,7 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }) {
     setTimeLeft(currentConfig.defaultSecs);
   };
 
-  const formatTime = (secs) => {
+  const formatTime = (secs: number) => {
     const m = Math.floor(secs / 60);
     const s = secs % 60;
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
@@ -117,7 +126,7 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }) {
       <div className="bg-slate-900/80 border border-white/10 rounded-3xl p-8 backdrop-blur-2xl text-center shadow-2xl relative overflow-hidden">
         {/* Phase Selector Chips */}
         <div className="flex items-center justify-center gap-2 mb-8">
-          {Object.keys(phaseConfigs).map((pKey) => {
+          {(Object.keys(phaseConfigs) as PhaseType[]).map((pKey) => {
             const cfg = phaseConfigs[pKey];
             const isActive = phase === pKey;
             return (
