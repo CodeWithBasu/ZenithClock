@@ -17,6 +17,16 @@ import {
 } from 'lucide-react';
 import { audioSynth } from '@/lib/audioSynth';
 
+interface HeaderProps {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+  theme: string;
+  setTheme: (theme: string) => void;
+  ambientSound: string;
+  setAmbientSound: (sound: string) => void;
+  onOpenSettings: () => void;
+}
+
 export default function Header({
   activeTab,
   setActiveTab,
@@ -25,7 +35,7 @@ export default function Header({
   ambientSound,
   setAmbientSound,
   onOpenSettings
-}) {
+}: HeaderProps) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
