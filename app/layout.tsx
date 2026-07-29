@@ -15,6 +15,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Chronopulse - Smart Zenith Clock",
   description: "A smart brilliant clock with immersive amazing features including alarms, world time, timer, and stopwatch.",
+  keywords: ["clock", "smart clock", "world time", "timer", "stopwatch", "pomodoro", "focus mode"],
+  authors: [{ name: "CodeWithBasu" }],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
