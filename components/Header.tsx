@@ -82,26 +82,26 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/60 border-b border-white/10 px-4 py-3 shadow-2xl transition-all">
+    <header className="sticky top-0 z-40 backdrop-blur-2xl bg-black/40 border-b border-white/5 px-4 py-3 shadow-sm transition-all">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         
         {/* Brand Header */}
         <div className="flex items-center gap-3">
-          <div className="relative p-2.5 rounded-2xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-purple-600 shadow-lg shadow-cyan-500/20">
-            <Sparkles className="w-6 h-6 text-white animate-pulse" />
+          <div className="relative p-2 rounded-xl bg-white/10 border border-white/5 shadow-sm">
+            <Sparkles className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-cyan-200 to-blue-400 bg-clip-text text-transparent">
-              ChronoPulse
+            <h1 className="text-xl font-extrabold tracking-widest text-white">
+              CHRONOPULSE
             </h1>
-            <p className="text-[10px] uppercase font-semibold tracking-widest text-cyan-400/80">
-              Next-Gen Smart Suite
+            <p className="text-[9px] uppercase font-semibold tracking-[0.2em] text-zinc-500">
+              Smart Suite
             </p>
           </div>
         </div>
 
         {/* Tab Navigation */}
-        <nav className="flex items-center gap-1 bg-white/5 p-1.5 rounded-2xl border border-white/10 overflow-x-auto max-w-full">
+        <nav className="flex items-center gap-1 bg-white/5 p-1 rounded-2xl border border-white/5 overflow-x-auto max-w-full">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -112,13 +112,13 @@ export default function Header({
                   audioSynth.playClick();
                   setActiveTab(tab.id);
                 }}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all whitespace-nowrap ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-xs transition-all whitespace-nowrap ${
                   isActive
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25 scale-[1.02]'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                    ? 'bg-white/10 text-white shadow-sm'
+                    : 'text-zinc-500 hover:text-white hover:bg-white/5'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'animate-bounce' : ''}`} />
+                <Icon className={`w-3.5 h-3.5 ${isActive ? 'opacity-100' : 'opacity-70'}`} />
                 {tab.label}
               </button>
             );
@@ -133,7 +133,7 @@ export default function Header({
           <button
             onClick={onOpenSettings}
             title="Database & Preferences Settings"
-            className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 transition-all"
+            className="p-2.5 rounded-xl bg-white/5 border border-white/5 text-zinc-400 hover:bg-white/10 hover:text-white transition-all"
           >
             <Settings className="w-4 h-4" />
           </button>

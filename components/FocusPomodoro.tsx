@@ -20,9 +20,9 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
   const [completedSessions, setCompletedSessions] = useState(0);
 
   const phaseConfigs = {
-    work: { title: 'Deep Work Session', defaultSecs: 1500, color: 'from-amber-500 to-rose-600', icon: Flame },
-    shortBreak: { title: 'Short Break', defaultSecs: 300, color: 'from-emerald-500 to-teal-600', icon: Zap },
-    longBreak: { title: 'Long Break', defaultSecs: 900, color: 'from-indigo-500 to-blue-600', icon: Sparkles },
+    work: { title: 'Deep Work Session', defaultSecs: 1500, icon: Flame },
+    shortBreak: { title: 'Short Break', defaultSecs: 300, icon: Zap },
+    longBreak: { title: 'Long Break', defaultSecs: 900, icon: Sparkles },
   };
 
   const currentConfig = phaseConfigs[phase];
@@ -101,29 +101,29 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900/60 border border-white/10 p-6 rounded-3xl backdrop-blur-xl">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-zinc-950/50 border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
         <div className="flex items-center gap-3">
-          <div className="p-3 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30">
+          <div className="p-3 rounded-2xl bg-white/5 text-white border border-white/5">
             <Flame className="w-6 h-6" />
           </div>
           <div>
             <h2 className="text-xl font-extrabold text-white">Focus & Pomodoro Studio</h2>
-            <p className="text-xs text-slate-400">Maximize focus with structured work/break cycles & ambient soundscapes.</p>
+            <p className="text-xs text-zinc-400">Maximize focus with structured work/break cycles & ambient soundscapes.</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 text-xs font-bold text-slate-300">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300">
-            <Flame className="w-4 h-4 text-amber-400" /> Streak: {streakCount}
+        <div className="flex items-center gap-4 text-xs font-bold text-zinc-300">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-zinc-300">
+            <Flame className="w-4 h-4 text-white" /> Streak: {streakCount}
           </div>
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">
-            <Award className="w-4 h-4 text-emerald-400" /> Completed: {completedSessions}
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-zinc-300">
+            <Award className="w-4 h-4 text-white" /> Completed: {completedSessions}
           </div>
         </div>
       </div>
 
       {/* Main Focus Card */}
-      <div className="bg-slate-900/80 border border-white/10 rounded-3xl p-8 backdrop-blur-2xl text-center shadow-2xl relative overflow-hidden">
+      <div className="bg-zinc-950/50 border border-white/10 rounded-3xl p-8 backdrop-blur-2xl text-center shadow-sm relative overflow-hidden">
         {/* Phase Selector Chips */}
         <div className="flex items-center justify-center gap-2 mb-8">
           {(Object.keys(phaseConfigs) as PhaseType[]).map((pKey) => {
@@ -135,8 +135,8 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
                 onClick={() => switchPhase(pKey)}
                 className={`px-4 py-2 rounded-2xl text-xs font-bold transition-all ${
                   isActive
-                    ? `bg-gradient-to-r ${cfg.color} text-white shadow-lg scale-105`
-                    : 'bg-white/5 text-slate-400 hover:text-white'
+                    ? `bg-white text-black shadow-sm scale-105`
+                    : 'bg-white/5 text-zinc-400 hover:text-white'
                 }`}
               >
                 {cfg.title}
@@ -147,21 +147,21 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
 
         {/* Display Time */}
         <div className="my-6">
-          <span className="text-7xl sm:text-9xl font-extrabold font-mono tracking-tight bg-gradient-to-b from-white via-slate-100 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(245,158,11,0.4)]">
+          <span className="text-7xl sm:text-9xl font-extrabold font-mono tracking-tight text-white">
             {formatTime(timeLeft)}
           </span>
         </div>
 
-        <p className="text-xs italic text-slate-400 mb-8 max-w-md mx-auto">{randomQuote}</p>
+        <p className="text-xs italic text-zinc-400 mb-8 max-w-md mx-auto">{randomQuote}</p>
 
         {/* Control Buttons */}
         <div className="flex items-center justify-center gap-4">
           <button
             onClick={toggleTimer}
-            className={`flex items-center gap-2 px-8 py-4 rounded-2xl font-extrabold text-base shadow-xl transition-all scale-[1.02] ${
+            className={`flex items-center gap-2 px-8 py-4 rounded-2xl font-extrabold text-base shadow-sm transition-all scale-[1.02] ${
               isRunning
-                ? 'bg-amber-500 hover:bg-amber-400 text-white shadow-amber-500/25'
-                : 'bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white shadow-amber-500/25'
+                ? 'bg-white/10 text-white border border-white/10 hover:bg-white/20'
+                : 'bg-white text-black hover:bg-zinc-200'
             }`}
           >
             {isRunning ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
@@ -170,7 +170,7 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
 
           <button
             onClick={resetTimer}
-            className="p-4 rounded-2xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+            className="p-4 rounded-2xl bg-white/5 border border-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
           >
             <RotateCcw className="w-5 h-5" />
           </button>

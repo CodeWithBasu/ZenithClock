@@ -107,39 +107,39 @@ export default function StopwatchSection() {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900/60 border border-white/10 p-6 rounded-3xl backdrop-blur-xl">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-zinc-950/50 border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
         <div className="flex items-center gap-3">
-          <div className="p-3 rounded-2xl bg-purple-500/20 text-purple-400 border border-purple-500/30">
+          <div className="p-3 rounded-2xl bg-white/5 text-white border border-white/5">
             <TimerReset className="w-6 h-6" />
           </div>
           <div>
             <h2 className="text-xl font-extrabold text-white">Precision Stopwatch</h2>
-            <p className="text-xs text-slate-400">Millisecond accurate stopwatch with lap analytics & CSV export.</p>
+            <p className="text-xs text-zinc-400">Millisecond accurate stopwatch with lap analytics & CSV export.</p>
           </div>
         </div>
 
         {laps.length > 0 && (
           <button
             onClick={exportCSV}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-bold text-xs transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 text-white font-bold text-xs transition-all"
           >
-            <Download className="w-4 h-4 text-purple-400" /> Export Laps CSV
+            <Download className="w-4 h-4 text-white" /> Export Laps CSV
           </button>
         )}
       </div>
 
       {/* Main Stopwatch Card */}
-      <div className="bg-slate-900/80 border border-white/10 rounded-3xl p-8 backdrop-blur-2xl text-center shadow-2xl relative overflow-hidden">
-        <div className="flex items-center justify-center gap-2 mb-4 text-purple-400 text-xs font-bold uppercase tracking-widest">
+      <div className="bg-zinc-950/50 border border-white/10 rounded-3xl p-8 backdrop-blur-2xl text-center shadow-sm relative overflow-hidden">
+        <div className="flex items-center justify-center gap-2 mb-4 text-zinc-400 text-xs font-bold uppercase tracking-widest">
           <Sparkles className="w-4 h-4" /> Millisecond Counter
         </div>
 
         {/* Display Digits */}
         <div className="flex items-baseline justify-center gap-2 my-6">
-          <span className="text-6xl sm:text-8xl md:text-9xl font-extrabold font-mono tracking-tight bg-gradient-to-b from-white via-slate-100 to-purple-300 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(168,85,247,0.4)]">
+          <span className="text-6xl sm:text-8xl md:text-9xl font-extrabold font-mono tracking-tight text-white">
             {formatted.main}
           </span>
-          <span className="text-2xl sm:text-4xl font-extrabold font-mono text-purple-400 drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+          <span className="text-2xl sm:text-4xl font-extrabold font-mono text-zinc-500">
             .{formatted.ms}
           </span>
         </div>
@@ -148,10 +148,10 @@ export default function StopwatchSection() {
         <div className="flex items-center justify-center gap-4 mt-8">
           <button
             onClick={toggleStartPause}
-            className={`flex items-center gap-2 px-8 py-4 rounded-2xl font-extrabold text-base shadow-xl transition-all scale-[1.02] ${
+            className={`flex items-center gap-2 px-8 py-4 rounded-2xl font-extrabold text-base shadow-sm transition-all scale-[1.02] ${
               isRunning
-                ? 'bg-amber-500 hover:bg-amber-400 text-white shadow-amber-500/25'
-                : 'bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white shadow-purple-500/25'
+                ? 'bg-white/10 text-white border border-white/10 hover:bg-white/20'
+                : 'bg-white text-black hover:bg-zinc-200'
             }`}
           >
             {isRunning ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
@@ -161,14 +161,14 @@ export default function StopwatchSection() {
           <button
             onClick={handleLap}
             disabled={!isRunning}
-            className="flex items-center gap-2 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 disabled:opacity-40 text-white font-bold text-base transition-all"
+            className="flex items-center gap-2 px-6 py-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 disabled:opacity-40 text-white font-bold text-base transition-all"
           >
-            <Flag className="w-5 h-5 text-purple-400" /> Lap
+            <Flag className="w-5 h-5 text-white" /> Lap
           </button>
 
           <button
             onClick={handleReset}
-            className="p-4 rounded-2xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+            className="p-4 rounded-2xl bg-white/5 border border-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
           >
             <RotateCcw className="w-5 h-5" />
           </button>
@@ -178,43 +178,43 @@ export default function StopwatchSection() {
       {/* Lap Stats & Analytics Header */}
       {laps.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-emerald-950/40 border border-emerald-500/30 p-4 rounded-2xl backdrop-blur-xl flex items-center justify-between">
+          <div className="bg-black/20 border border-white/5 p-4 rounded-2xl backdrop-blur-xl flex items-center justify-between">
             <div>
-              <div className="text-[11px] font-bold uppercase text-emerald-400">Fastest Lap</div>
+              <div className="text-[11px] font-bold uppercase text-white">Fastest Lap</div>
               <div className="text-xl font-extrabold font-mono text-white">
                 {formatMs(minLapMs).main}.{formatMs(minLapMs).ms}
               </div>
             </div>
-            <Award className="w-6 h-6 text-emerald-400" />
+            <Award className="w-6 h-6 text-white" />
           </div>
 
-          <div className="bg-rose-950/40 border border-rose-500/30 p-4 rounded-2xl backdrop-blur-xl flex items-center justify-between">
+          <div className="bg-black/20 border border-white/5 p-4 rounded-2xl backdrop-blur-xl flex items-center justify-between">
             <div>
-              <div className="text-[11px] font-bold uppercase text-rose-400">Slowest Lap</div>
+              <div className="text-[11px] font-bold uppercase text-zinc-500">Slowest Lap</div>
               <div className="text-xl font-extrabold font-mono text-white">
                 {formatMs(maxLapMs).main}.{formatMs(maxLapMs).ms}
               </div>
             </div>
-            <TrendingUp className="w-6 h-6 text-rose-400" />
+            <TrendingUp className="w-6 h-6 text-zinc-500" />
           </div>
 
-          <div className="bg-indigo-950/40 border border-indigo-500/30 p-4 rounded-2xl backdrop-blur-xl flex items-center justify-between">
+          <div className="bg-black/20 border border-white/5 p-4 rounded-2xl backdrop-blur-xl flex items-center justify-between">
             <div>
-              <div className="text-[11px] font-bold uppercase text-indigo-400">Average Lap</div>
+              <div className="text-[11px] font-bold uppercase text-zinc-400">Average Lap</div>
               <div className="text-xl font-extrabold font-mono text-white">
                 {formatMs(avgLapMs).main}.{formatMs(avgLapMs).ms}
               </div>
             </div>
-            <Sparkles className="w-6 h-6 text-indigo-400" />
+            <Sparkles className="w-6 h-6 text-zinc-400" />
           </div>
         </div>
       )}
 
       {/* Lap Table */}
       {laps.length > 0 && (
-        <div className="bg-slate-900/60 border border-white/10 rounded-3xl p-6 backdrop-blur-xl">
+        <div className="bg-zinc-950/50 border border-white/5 rounded-3xl p-6 backdrop-blur-xl">
           <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
-            <Flag className="w-4 h-4 text-purple-400" /> Lap History Breakdown
+            <Flag className="w-4 h-4 text-white" /> Lap History Breakdown
           </h3>
 
           <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
@@ -230,26 +230,26 @@ export default function StopwatchSection() {
                   key={l.id}
                   className={`flex items-center justify-between p-3.5 rounded-2xl border text-xs font-mono transition-all ${
                     isFastest
-                      ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-300'
+                      ? 'bg-white/10 border-white/20 text-white'
                       : isSlowest
-                      ? 'bg-rose-500/10 border-rose-500/40 text-rose-300'
-                      : 'bg-white/5 border-white/5 text-slate-300'
+                      ? 'bg-black/20 border-white/5 text-zinc-500'
+                      : 'bg-white/5 border-white/5 text-zinc-400'
                   }`}
                 >
                   <div className="flex items-center gap-3 font-bold">
                     <span>Lap #{l.id}</span>
-                    {isFastest && <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-sans">Fastest</span>}
-                    {isSlowest && <span className="text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-sans">Slowest</span>}
+                    {isFastest && <span className="text-[10px] px-2 py-0.5 rounded bg-white/20 text-white font-sans">Fastest</span>}
+                    {isSlowest && <span className="text-[10px] px-2 py-0.5 rounded bg-black text-zinc-500 border border-white/10 font-sans">Slowest</span>}
                   </div>
 
                   <div className="flex items-center gap-6 font-bold">
                     <div>
-                      <span className="text-slate-500 font-sans text-[10px] block">Lap Time</span>
+                      <span className="text-zinc-500 font-sans text-[10px] block">Lap Time</span>
                       <span>+{formattedLap.main}.{formattedLap.ms}</span>
                     </div>
 
                     <div>
-                      <span className="text-slate-500 font-sans text-[10px] block">Overall Time</span>
+                      <span className="text-zinc-500 font-sans text-[10px] block">Overall Time</span>
                       <span>{formattedTotal.main}.{formattedTotal.ms}</span>
                     </div>
                   </div>
