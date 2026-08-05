@@ -147,7 +147,7 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
 
         {/* Display Time */}
         <div className="my-6">
-          <span className="text-7xl sm:text-9xl font-extrabold font-mono tracking-tight text-white">
+          <span className="text-7xl sm:text-9xl font-extrabold font-hud tracking-widest">
             {formatTime(timeLeft)}
           </span>
         </div>

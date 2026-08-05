@@ -136,7 +136,7 @@ export default function StopwatchSection() {
 
         {/* Display Digits */}
         <div className="flex items-baseline justify-center gap-2 my-6">
-          <span className="text-6xl sm:text-8xl md:text-9xl font-extrabold font-mono tracking-tight text-white">
+          <span className="text-6xl sm:text-8xl md:text-9xl font-extrabold font-hud tracking-widest">
             {formatted.main}
           </span>
           <span className="text-2xl sm:text-4xl font-extrabold font-mono text-zinc-500">

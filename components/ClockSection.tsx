@@ -124,7 +124,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
 
             {/* Time Digits */}
             <div className="flex items-baseline justify-center gap-2 sm:gap-4 my-6">
-              <span className="text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-tight text-white">
+              <span className="text-6xl sm:text-8xl md:text-9xl font-hud tracking-widest">
                 {displayHours}:{displayMinutes}
               </span>
               <div className="flex flex-col items-start gap-1">

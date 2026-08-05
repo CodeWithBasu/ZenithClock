@@ -210,7 +210,7 @@ export default function TimerSection() {
                 </svg>
 
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-3xl font-extrabold font-mono text-white tracking-tight">
+                  <span className="text-3xl font-extrabold font-hud tracking-widest">
                     {formatSeconds(t.remainingSeconds)}
                   </span>
                   <span className="text-[10px] font-bold text-slate-400 mt-1 max-w-[120px] truncate">

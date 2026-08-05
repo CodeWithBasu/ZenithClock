@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Orbitron } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,6 +12,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Chronopulse - Smart Zenith Clock",
   description: "A smart brilliant clock with immersive amazing features including alarms, world time, timer, and stopwatch.",
@@ -21,10 +26,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+      <html
+        lang="en"
+        className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} h-full antialiased`}
+      >
       <body className="min-h-full flex flex-col bg-black">{children}</body>
     </html>
   );
