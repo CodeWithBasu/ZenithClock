@@ -114,7 +114,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
         {/* Digital Clock Card */}
         {(clockType === 'digital' || clockType === 'both') && (
           <div
-            className={`bg-zinc-950/50 border border-white/5 rounded-3xl p-8 backdrop-blur-2xl text-center shadow-xl relative overflow-hidden group ${
+            className={`bg-transparent border border-white/5 rounded-3xl p-8 backdrop-blur-2xl text-center shadow-xl relative overflow-hidden group ${
               clockType === 'both' ? 'lg:col-span-7' : 'lg:col-span-12'
             }`}
           >
@@ -164,7 +164,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
         {/* Analog Clock Card */}
         {(clockType === 'analog' || clockType === 'both') && (
           <div
-            className={`bg-zinc-950/50 border border-white/5 rounded-3xl p-8 backdrop-blur-2xl flex flex-col items-center justify-center shadow-xl relative overflow-hidden ${
+            className={`bg-transparent border border-white/5 rounded-3xl p-8 backdrop-blur-2xl flex flex-col items-center justify-center shadow-xl relative overflow-hidden ${
               clockType === 'both' ? 'lg:col-span-5' : 'lg:col-span-12'
             }`}
           >
@@ -184,27 +184,11 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
                     className="fill-black stroke-white/5"
                     strokeWidth="1"
                   />
-                  
-                  {/* Cyber Core Background Image */}
-                  <image
-                    href="/cyber-core.png"
-                    x="25"
-                    y="25"
-                    width="150"
-                    height="150"
-                    className="opacity-90"
-                    style={{ 
-                      filter: 'invert(1) drop-shadow(0 0 10px rgba(6,182,212,0.8))',
-                      transformOrigin: '100px 100px',
-                      transform: 'rotate(90deg)' // Counteract the SVG -rotate-90 so the skull is upright
-                    }}
-                  />
-
                   <circle
                     cx="100"
                     cy="100"
                     r="85"
-                    className="fill-none stroke-cyan-500/20"
+                    className="fill-none stroke-white/5"
                     strokeWidth="1"
                   />
 
@@ -272,7 +256,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
       </div>
 
       {/* Smart Sleep & Bedtime Calculator Section */}
-      <div className="bg-zinc-950/50 border border-white/5 rounded-3xl p-6 backdrop-blur-xl">
+      <div className="bg-transparent border border-white/5 rounded-3xl p-6 backdrop-blur-xl">
         <div className="flex items-center gap-3 mb-4">
           <BedDouble className="w-5 h-5 text-zinc-500" />
           <h3 className="text-base font-bold text-white">Smart Bedtime & Sleep Cycle Calculator</h3>
