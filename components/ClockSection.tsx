@@ -184,11 +184,27 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
                     className="fill-black stroke-white/5"
                     strokeWidth="1"
                   />
+                  
+                  {/* Cyber Core Background Image */}
+                  <image
+                    href="/cyber-core.png"
+                    x="25"
+                    y="25"
+                    width="150"
+                    height="150"
+                    className="opacity-90"
+                    style={{ 
+                      filter: 'invert(1) drop-shadow(0 0 10px rgba(6,182,212,0.8))',
+                      transformOrigin: '100px 100px',
+                      transform: 'rotate(90deg)' // Counteract the SVG -rotate-90 so the skull is upright
+                    }}
+                  />
+
                   <circle
                     cx="100"
                     cy="100"
                     r="85"
-                    className="fill-none stroke-white/5"
+                    className="fill-none stroke-cyan-500/20"
                     strokeWidth="1"
                   />
 
