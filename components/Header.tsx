@@ -15,6 +15,7 @@ import {
   Settings,
   Flame
 } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { audioSynth } from '@/lib/audioSynth';
 
 interface HeaderProps {
@@ -38,6 +39,7 @@ export default function Header({
 }: HeaderProps) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const isMobile = useIsMobile();
 
   const tabs = [
     { id: 'clock', label: 'Clock', icon: Clock },
@@ -91,8 +93,8 @@ export default function Header({
             <Sparkles className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold tracking-widest text-white">
-              CHRONOPULSE
+            <h1 className="text-xl font-extrabold tracking-widest text-white transition-all">
+              {isMobile ? 'CHRONO' : 'CHRONOPULSE'}
             </h1>
             <p className="text-[9px] uppercase font-semibold tracking-[0.2em] text-zinc-500">
               Smart Suite
