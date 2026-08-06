@@ -101,7 +101,7 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-zinc-950/50 border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
         <div className="flex items-center gap-3">
           <div className="p-3 rounded-2xl bg-white/5 text-white border border-white/5">
             <Flame className="w-6 h-6" />
@@ -123,7 +123,7 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
       </div>
 
       {/* Main Focus Card */}
-      <div className="bg-zinc-950/50 border border-white/10 rounded-3xl p-8 backdrop-blur-2xl text-center shadow-sm relative overflow-hidden">
+      <div className="bg-transparent border border-white/10 rounded-3xl p-8 backdrop-blur-2xl text-center shadow-sm relative overflow-hidden">
         {/* Phase Selector Chips */}
         <div className="flex items-center justify-center gap-2 mb-8">
           {(Object.keys(phaseConfigs) as PhaseType[]).map((pKey) => {
