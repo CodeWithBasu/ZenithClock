@@ -105,7 +105,7 @@ export default function StopwatchSection() {
   };
 
   return (
-    <div className="space-y-8 animate-fadeIn">
+    <div className="h-full flex flex-col space-y-2 animate-fadeIn overflow-hidden pb-2">
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
         <div className="flex items-center gap-3">
@@ -210,9 +210,9 @@ export default function StopwatchSection() {
         </div>
       )}
 
-      {/* Lap Table */}
+      {/* Scrollable Lap Table */}
       {laps.length > 0 && (
-        <div className="bg-transparent border border-white/5 rounded-3xl p-6 backdrop-blur-xl">
+        <div className="flex-1 overflow-y-auto bg-transparent border border-white/5 rounded-3xl p-6 backdrop-blur-xl custom-scrollbar">
           <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
             <Flag className="w-4 h-4 text-white" /> Lap History Breakdown
           </h3>
