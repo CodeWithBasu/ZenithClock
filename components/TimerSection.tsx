@@ -118,7 +118,7 @@ export default function TimerSection() {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-zinc-950/50 border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
         <div className="flex items-center gap-3">
           <div className="p-3 rounded-2xl bg-white/5 text-white border border-white/5">
             <Timer className="w-6 h-6" />
