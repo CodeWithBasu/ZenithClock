@@ -142,8 +142,16 @@ export default function Home() {
       </div>
 
       {/* Bottom Navigation Bar (Mobile Only) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-2xl border-t border-white/5 pb-safe">
-        <div className="flex items-center justify-around px-2 py-3">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-3xl border-t border-white/10 pb-safe h-20 rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+        <div className="relative flex items-center h-full px-2">
+          {/* Animated Sliding Indicator Circle */}
+          <div
+            className="absolute top-[-24px] w-14 h-14 rounded-full bg-white shadow-[0_8px_16px_rgba(255,255,255,0.2)] transition-all duration-500 ease-[cubic-bezier(0.68,-0.55,0.26,1.55)] z-10 border-[6px] border-[#09090b]"
+            style={{
+              left: `calc(${(tabs.findIndex(t => t.id === activeTab) * (100 / tabs.length))}% + ${(100 / tabs.length) / 2}% - 28px)`
+            }}
+          />
+
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -151,14 +159,24 @@ export default function Home() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all active:scale-95 ${
-                  isActive ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'
-                }`}
+                className="relative z-20 flex-1 flex flex-col items-center justify-center h-full group"
               >
-                <div className={`p-1.5 rounded-full transition-all ${isActive ? 'bg-white/10' : 'bg-transparent'}`}>
-                  <Icon className={`w-5 h-5 ${isActive ? 'opacity-100' : 'opacity-70'}`} />
+                <div
+                  className={`p-3 rounded-full transition-all duration-500 ${
+                    isActive
+                      ? '-translate-y-8 text-black scale-110'
+                      : 'translate-y-0 text-zinc-500 group-hover:text-white'
+                  }`}
+                >
+                  <Icon className="w-6 h-6" />
                 </div>
-                <span className="text-[10px] font-medium tracking-wide">{tab.label}</span>
+                <span
+                  className={`absolute bottom-2 text-[10px] font-bold tracking-wide transition-all duration-500 ${
+                    isActive ? 'opacity-100 translate-y-0 text-white' : 'opacity-0 translate-y-4 text-zinc-500'
+                  }`}
+                >
+                  {tab.label}
+                </span>
               </button>
             );
           })}
