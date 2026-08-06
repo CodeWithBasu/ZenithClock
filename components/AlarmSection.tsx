@@ -138,7 +138,7 @@ export default function AlarmSection({ alarms, setAlarms }: AlarmSectionProps) {
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-zinc-950/50 border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
         <div className="flex items-center gap-3">
           <div className="p-3 rounded-2xl bg-white/5 text-white border border-white/5">
             <AlarmClock className="w-6 h-6" />
@@ -329,7 +329,7 @@ export default function AlarmSection({ alarms, setAlarms }: AlarmSectionProps) {
       {/* Ringing Alarm & Math Challenge Modal */}
       {ringingAlarm && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
-          <div className="bg-slate-900 border-2 border-rose-500/50 rounded-3xl p-8 max-w-md w-full text-center shadow-[0_0_50px_rgba(244,63,94,0.3)] animate-bounceSlow">
+          <div className="bg-transparent backdrop-blur-3xl border-2 border-rose-500/50 rounded-3xl p-8 max-w-md w-full text-center shadow-[0_0_50px_rgba(244,63,94,0.3)] animate-bounceSlow">
             <div className="w-16 h-16 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center mx-auto mb-4 animate-pulse">
               <Bell className="w-8 h-8" />
             </div>
