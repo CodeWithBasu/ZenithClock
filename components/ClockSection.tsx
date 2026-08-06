@@ -72,9 +72,9 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
   const isNight = hours < 6 || hours >= 19;
 
   return (
-    <div className="space-y-8 animate-fadeIn">
+    <div className="h-full flex flex-col justify-between space-y-2 animate-fadeIn pb-2">
       {/* Clock Mode Controls */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-black/20 border border-white/5 p-4 rounded-2xl backdrop-blur-md">
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-black/20 border border-white/5 p-3 rounded-2xl backdrop-blur-md">
         <div className="flex items-center gap-2">
           {isNight ? <Moon className="w-5 h-5 text-zinc-400" /> : <Sun className="w-5 h-5 text-zinc-400" />}
           <span className="text-sm font-semibold text-zinc-300">
@@ -109,12 +109,12 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
       </div>
 
       {/* Primary Display Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center min-h-0">
         
         {/* Digital Clock Card */}
         {(clockType === 'digital' || clockType === 'both') && (
           <div
-            className={`bg-transparent border border-white/5 rounded-3xl p-8 backdrop-blur-2xl text-center shadow-xl relative overflow-hidden group ${
+            className={`bg-transparent border border-white/5 rounded-3xl p-4 md:p-6 backdrop-blur-2xl text-center shadow-xl relative overflow-hidden group flex flex-col justify-center ${
               clockType === 'both' ? 'lg:col-span-7' : 'lg:col-span-12'
             }`}
           >
@@ -123,7 +123,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
             </div>
 
             {/* Time Digits */}
-            <div className="flex items-baseline justify-center gap-2 sm:gap-4 my-6">
+            <div className="flex items-baseline justify-center gap-2 sm:gap-4 my-2 md:my-4">
               <span className="text-6xl sm:text-8xl md:text-9xl font-hud tracking-widest">
                 {displayHours}:{displayMinutes}
               </span>
@@ -146,7 +146,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
             </div>
 
             {/* Day Progress Bar */}
-            <div className="mt-8 pt-6 border-t border-white/5">
+            <div className="mt-4 pt-4 border-t border-white/5">
               <div className="flex justify-between text-xs text-zinc-500 mb-2 font-medium">
                 <span>Day Progress</span>
                 <span className="text-white font-bold">{dayProgressPercent}%</span>
@@ -164,7 +164,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
         {/* Analog Clock Card */}
         {(clockType === 'analog' || clockType === 'both') && (
           <div
-            className={`bg-transparent border border-white/5 rounded-3xl p-8 backdrop-blur-2xl flex flex-col items-center justify-center shadow-xl relative overflow-hidden ${
+            className={`bg-transparent border border-white/5 rounded-3xl p-4 md:p-6 backdrop-blur-2xl flex flex-col items-center justify-center shadow-xl relative overflow-hidden h-full ${
               clockType === 'both' ? 'lg:col-span-5' : 'lg:col-span-12'
             }`}
           >
@@ -173,7 +173,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
             </h3>
 
             {/* SVG Analog Clock */}
-            <div className="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center">
+            <div className="relative w-full aspect-square max-h-[30vh] max-w-[30vh] flex items-center justify-center mx-auto">
               {mounted && (
                 <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
                   {/* Clock Face Circle */}
@@ -256,7 +256,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
       </div>
 
       {/* Smart Sleep & Bedtime Calculator Section */}
-      <div className="bg-transparent border border-white/5 rounded-3xl p-6 backdrop-blur-xl">
+      <div className="bg-transparent border border-white/5 rounded-3xl p-4 backdrop-blur-xl shrink-0">
         <div className="flex items-center gap-3 mb-4">
           <BedDouble className="w-5 h-5 text-zinc-500" />
           <h3 className="text-base font-bold text-white">Smart Bedtime & Sleep Cycle Calculator</h3>
