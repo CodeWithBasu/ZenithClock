@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Timer, Play, Pause, RotateCcw, Plus, Trash2, CheckCircle2, Sparkles, Coffee, Flame, Zap } from 'lucide-react';
 import { audioSynth } from '@/lib/audioSynth';
 import confetti from 'canvas-confetti';
+import { useToast } from '@/hooks/use-toast';
 
 interface TimerData {
   id: string;
@@ -15,6 +16,7 @@ interface TimerData {
 }
 
 export default function TimerSection() {
+  const { toast } = useToast();
   const [timers, setTimers] = useState<TimerData[]>([
     { id: '1', title: 'Pomodoro Focus', totalSeconds: 1500, remainingSeconds: 1500, isRunning: false, category: 'Focus' },
     { id: '2', title: 'Power Nap', totalSeconds: 600, remainingSeconds: 600, isRunning: false, category: 'Rest' },
@@ -37,6 +39,10 @@ export default function TimerSection() {
             // Timer Finished!
             audioSynth.playCompletionSound();
             confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+            toast({
+              title: "Timer Finished",
+              description: `${t.title} has completed!`,
+            });
             return { ...t, remainingSeconds: 0, isRunning: false };
           }
 
@@ -46,7 +52,7 @@ export default function TimerSection() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [toast]);
 
   const toggleTimer = (id: string) => {
     audioSynth.playClick();
@@ -68,7 +74,14 @@ export default function TimerSection() {
 
   const handleAddCustomTimer = () => {
     const totalSecs = customHours * 3600 + customMins * 60 + customSecs;
-    if (totalSecs <= 0) return;
+    if (totalSecs <= 0) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid time for the custom timer.",
+        variant: "destructive"
+      });
+      return;
+    }
 
     const newT: TimerData = {
       id: Date.now().toString(),
@@ -81,6 +94,10 @@ export default function TimerSection() {
 
     setTimers([newT, ...timers]);
     setShowAddModal(false);
+    toast({
+      title: "Timer Added",
+      description: `Your custom timer for ${newT.title} was added successfully.`
+    });
   };
 
   const addPreset = (title: string, minutes: number, category: string) => {
