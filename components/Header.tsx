@@ -85,7 +85,7 @@ export default function Header({
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-2xl bg-black/40 border-b border-white/5 px-4 py-3 shadow-sm transition-all">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto flex flex-row items-center justify-between gap-4 w-full">
         
         {/* Brand Header */}
         <div className="flex items-center gap-3">
@@ -102,8 +102,8 @@ export default function Header({
           </div>
         </div>
 
-        {/* Tab Navigation */}
-        <nav className="flex items-center gap-1 bg-white/5 p-1 rounded-2xl border border-white/5 overflow-x-auto max-w-full">
+        {/* Tab Navigation (Desktop Only) */}
+        <nav className="hidden md:flex items-center gap-1 bg-white/5 p-1 rounded-2xl border border-white/5 overflow-x-auto max-w-full">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;

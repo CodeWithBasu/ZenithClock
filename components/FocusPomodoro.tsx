@@ -101,8 +101,8 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
   return (
     <div className="h-auto md:h-full flex flex-col space-y-4 md:space-y-2 animate-fadeIn overflow-hidden pb-2">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border-b md:border border-white/5 p-4 md:p-6 rounded-none md:rounded-3xl md:backdrop-blur-xl">
+        <div className="flex items-center gap-3 w-full sm:w-auto text-center sm:text-left">
           <div className="p-3 rounded-2xl bg-white/5 text-white border border-white/5">
             <Flame className="w-6 h-6" />
           </div>
@@ -123,7 +123,7 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
       </div>
 
       {/* Main Focus Card */}
-      <div className="flex-1 overflow-y-auto bg-transparent border border-white/10 rounded-3xl p-8 backdrop-blur-2xl text-center shadow-sm relative custom-scrollbar">
+      <div className="flex-1 overflow-y-auto bg-transparent md:border border-white/10 md:rounded-3xl p-4 md:p-8 md:backdrop-blur-2xl text-center md:shadow-sm relative custom-scrollbar">
         {/* Phase Selector Chips */}
         <div className="flex items-center justify-center gap-2 mb-8">
           {(Object.keys(phaseConfigs) as PhaseType[]).map((pKey) => {
@@ -147,7 +147,7 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
 
         {/* Display Time */}
         <div className="my-6">
-          <span className="text-7xl sm:text-9xl font-extrabold font-hud tracking-widest">
+          <span className="text-[6rem] leading-none sm:text-9xl font-extrabold font-hud tracking-widest drop-shadow-lg">
             {formatTime(timeLeft)}
           </span>
         </div>
@@ -155,22 +155,22 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
         <p className="text-xs italic text-zinc-400 mb-8 max-w-md mx-auto">{randomQuote}</p>
 
         {/* Control Buttons */}
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex items-center justify-center gap-4 w-full max-w-sm mx-auto">
           <button
             onClick={toggleTimer}
-            className={`flex items-center gap-2 px-8 py-4 rounded-2xl font-extrabold text-base shadow-sm transition-all scale-[1.02] ${
+            className={`flex items-center justify-center flex-1 gap-2 py-3 md:py-4 rounded-2xl font-extrabold text-sm md:text-base shadow-sm transition-all active:scale-95 ${
               isRunning
                 ? 'bg-white/10 text-white border border-white/10 hover:bg-white/20'
                 : 'bg-white text-black hover:bg-zinc-200'
             }`}
           >
-            {isRunning ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-            {isRunning ? 'Pause Focus' : 'Start Focus'}
+            {isRunning ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 fill-black" />}
+            {isRunning ? 'Pause' : 'Start'}
           </button>
 
           <button
             onClick={resetTimer}
-            className="p-4 rounded-2xl bg-white/5 border border-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
+            className="p-3 md:p-4 rounded-2xl bg-white/5 border border-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-all active:scale-95"
           >
             <RotateCcw className="w-5 h-5" />
           </button>

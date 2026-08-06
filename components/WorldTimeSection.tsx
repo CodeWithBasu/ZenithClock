@@ -54,8 +54,8 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
   return (
     <div className="h-auto md:h-full flex flex-col space-y-4 md:space-y-2 animate-fadeIn overflow-hidden pb-2">
       {/* Top Banner */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-transparent border border-white/5 p-4 rounded-3xl backdrop-blur-xl shrink-0">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-transparent border-b md:border border-white/5 p-4 rounded-none md:rounded-3xl md:backdrop-blur-xl shrink-0">
+        <div className="flex items-center gap-3 w-full sm:w-auto text-center sm:text-left">
           <div className="p-3 rounded-2xl bg-white/5 text-white border border-white/5">
             <Globe className="w-6 h-6" />
           </div>
@@ -67,7 +67,7 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
 
         <button
           onClick={() => setShowConverter(!showConverter)}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl font-bold text-xs border transition-all ${
+          className={`flex items-center justify-center w-full sm:w-auto gap-2 px-4 py-2.5 rounded-2xl font-bold text-xs border transition-all active:scale-95 ${
             showConverter
               ? 'bg-white text-black border-white shadow-sm'
               : 'bg-white/5 border-white/5 text-zinc-400 hover:bg-white/10 hover:text-white'
@@ -150,7 +150,7 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
                   key={cityObj.city}
                   title={`${cityObj.city}, ${cityObj.country} (${cityTime?.formatted})`}
                   onClick={() => togglePin(cityObj.city)}
-                  className={`p-2 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${
+                  className={`p-2 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 active:scale-90 ${
                     isPinned
                       ? 'bg-white border-white text-black shadow-sm'
                       : cityTime?.isNight
@@ -187,7 +187,7 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
             <button
               key={reg}
               onClick={() => setSelectedRegion(reg)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all active:scale-95 ${
                 selectedRegion === reg
                   ? 'bg-white text-black border border-white'
                   : 'bg-white/5 border border-white/5 text-zinc-500 hover:text-white hover:bg-white/10'
@@ -210,7 +210,7 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
           return (
             <div
               key={cityObj.city}
-              className={`p-5 rounded-3xl border backdrop-blur-xl transition-all relative overflow-hidden group ${
+              className={`p-4 md:p-5 rounded-[2rem] border md:backdrop-blur-xl transition-all relative overflow-hidden group ${
                 isPinned
                   ? 'bg-zinc-950/80 border-white/10 shadow-sm'
                   : 'bg-black/20 border-white/5 hover:border-white/10'
@@ -229,7 +229,7 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
 
                 <button
                   onClick={() => togglePin(cityObj.city)}
-                  className={`p-2 rounded-xl border transition-all ${
+                  className={`p-2 rounded-xl border transition-all active:scale-90 ${
                     isPinned
                       ? 'bg-white text-black border-white'
                       : 'bg-white/5 border-white/5 text-zinc-500 hover:text-white'

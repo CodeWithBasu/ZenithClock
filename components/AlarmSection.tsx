@@ -138,8 +138,8 @@ export default function AlarmSection({ alarms, setAlarms }: AlarmSectionProps) {
   return (
     <div className="h-auto md:h-full flex flex-col space-y-4 md:space-y-2 animate-fadeIn overflow-hidden pb-2">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border border-white/5 p-4 rounded-3xl backdrop-blur-xl shrink-0">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border-b md:border border-white/5 p-4 rounded-none md:rounded-3xl md:backdrop-blur-xl shrink-0">
+        <div className="flex items-center gap-3 w-full sm:w-auto text-center sm:text-left">
           <div className="p-3 rounded-2xl bg-white/5 text-white border border-white/5">
             <AlarmClock className="w-6 h-6" />
           </div>
@@ -151,7 +151,7 @@ export default function AlarmSection({ alarms, setAlarms }: AlarmSectionProps) {
 
         <button
           onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white hover:bg-zinc-200 text-black font-bold text-sm shadow-sm transition-all"
+          className="flex items-center justify-center w-full sm:w-auto gap-2 px-5 py-3 md:py-3 rounded-2xl bg-white hover:bg-zinc-200 text-black font-bold text-sm shadow-sm transition-all active:scale-95"
         >
           <Plus className="w-4 h-4" /> Add Alarm
         </button>
@@ -169,18 +169,18 @@ export default function AlarmSection({ alarms, setAlarms }: AlarmSectionProps) {
           alarms.map((alarm) => (
             <div
               key={alarm.id}
-              className={`p-6 rounded-3xl border transition-all backdrop-blur-xl flex items-center justify-between gap-4 ${
+              className={`p-4 md:p-6 rounded-[2rem] border transition-all md:backdrop-blur-xl flex items-center justify-between gap-3 md:gap-4 ${
                 alarm.enabled
-                  ? 'bg-zinc-950/80 border-white/10 shadow-sm'
+                  ? 'bg-zinc-950/80 md:bg-zinc-950/80 border-white/10 shadow-sm'
                   : 'bg-black/20 border-white/5 opacity-60'
               }`}
             >
-              <div className="space-y-2">
-                <div className="flex items-baseline gap-3">
-                  <span className="text-4xl font-extrabold text-white tracking-tight">
+              <div className="space-y-1 md:space-y-2">
+                <div className="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-3">
+                  <span className="text-4xl md:text-4xl font-extrabold text-white tracking-tight leading-none drop-shadow-md">
                     {alarm.time}
                   </span>
-                  <span className="text-xs uppercase font-bold text-white px-2 py-0.5 rounded-lg bg-white/5 border border-white/10">
+                  <span className="text-[10px] md:text-xs uppercase font-bold text-white px-2 py-0.5 rounded-lg bg-white/5 border border-white/10 w-fit">
                     {alarm.tone}
                   </span>
                 </div>
@@ -215,9 +215,9 @@ export default function AlarmSection({ alarms, setAlarms }: AlarmSectionProps) {
                 {/* Delete Button */}
                 <button
                   onClick={() => deleteAlarm(alarm.id)}
-                  className="p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-all"
+                  className="p-2 md:p-3 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-all active:scale-90"
                 >
-                  <Trash2 className="w-4 h-4" />
+                  <Trash2 className="w-5 h-5 md:w-4 md:h-4" />
                 </button>
               </div>
             </div>

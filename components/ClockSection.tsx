@@ -85,7 +85,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
         <div className="flex items-center gap-3">
           <button
             onClick={() => setFormat12h(!format12h)}
-            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/5 text-white border border-white/5 hover:bg-white/10 transition-all"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/5 text-white border border-white/5 hover:bg-white/10 active:scale-95 transition-all"
           >
             Format: {format12h ? '12-Hour' : '24-Hour'}
           </button>
@@ -95,7 +95,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
               <button
                 key={type}
                 onClick={() => setClockType(type)}
-                className={`px-3 py-1 rounded-lg text-xs capitalize font-medium transition-all ${
+                className={`px-3 py-1 rounded-lg text-xs capitalize font-medium active:scale-95 transition-all ${
                   clockType === type
                     ? 'bg-white text-black shadow-sm'
                     : 'text-zinc-500 hover:text-white'
@@ -114,25 +114,25 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
         {/* Digital Clock Card */}
         {(clockType === 'digital' || clockType === 'both') && (
           <div
-            className={`bg-transparent border border-white/5 rounded-3xl p-4 md:p-6 backdrop-blur-2xl text-center shadow-xl relative overflow-hidden group flex flex-col justify-center ${
+            className={`bg-transparent md:border border-white/5 rounded-3xl p-0 py-8 md:p-6 md:backdrop-blur-2xl text-center md:shadow-xl relative overflow-hidden group flex flex-col justify-center ${
               clockType === 'both' ? 'lg:col-span-7' : 'lg:col-span-12'
             }`}
           >
-            <div className="flex items-center justify-center gap-2 mb-4 text-zinc-400 text-xs font-bold tracking-widest uppercase">
-              <Sparkles className="w-4 h-4 text-zinc-500" /> Live Local Standard Time
+            <div className="flex items-center justify-center gap-2 mb-2 md:mb-4 text-zinc-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">
+              <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-zinc-500" /> Live Local Standard Time
             </div>
 
             {/* Time Digits */}
-            <div className="flex items-baseline justify-center gap-2 sm:gap-4 my-2 md:my-4">
-              <span className="text-6xl sm:text-8xl md:text-9xl font-hud tracking-widest">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-4 my-2 md:my-4">
+              <span className="text-[5.5rem] leading-none sm:text-8xl md:text-9xl font-hud tracking-widest drop-shadow-lg">
                 {displayHours}:{displayMinutes}
               </span>
-              <div className="flex flex-col items-start gap-1">
-                <span className="text-2xl sm:text-4xl font-medium text-zinc-400">
+              <div className="flex flex-row sm:flex-col items-center sm:items-start gap-2 sm:gap-1 mt-2 sm:mt-0">
+                <span className="text-3xl sm:text-4xl font-medium text-zinc-400">
                   :{displaySeconds}
                 </span>
                 {format12h && (
-                  <span className="text-base sm:text-xl font-bold text-zinc-500 tracking-wider">
+                  <span className="text-xl sm:text-xl font-bold text-zinc-500 tracking-wider">
                     {ampm}
                   </span>
                 )}
@@ -140,7 +140,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
             </div>
 
             {/* Date Badge */}
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-2xl bg-white/5 border border-white/5 text-zinc-300 text-sm font-medium">
+            <div className="inline-flex items-center justify-center gap-2 px-5 py-2 mt-4 md:mt-0 rounded-2xl bg-white/5 border border-white/5 text-zinc-300 text-xs md:text-sm font-medium mx-auto">
               <Calendar className="w-4 h-4 text-zinc-500" />
               {dateString}
             </div>
@@ -164,11 +164,11 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
         {/* Analog Clock Card */}
         {(clockType === 'analog' || clockType === 'both') && (
           <div
-            className={`bg-transparent border border-white/5 rounded-3xl p-4 md:p-6 backdrop-blur-2xl flex flex-col items-center justify-center shadow-xl relative overflow-hidden h-full ${
+            className={`bg-transparent md:border border-white/5 rounded-3xl p-4 md:p-6 md:backdrop-blur-2xl flex flex-col items-center justify-center md:shadow-xl relative overflow-hidden h-full ${
               clockType === 'both' ? 'lg:col-span-5' : 'lg:col-span-12'
             }`}
           >
-            <h3 className="text-xs font-bold tracking-widest text-zinc-500 uppercase mb-6 flex items-center gap-2">
+            <h3 className="text-[10px] md:text-xs font-bold tracking-widest text-zinc-500 uppercase mb-4 md:mb-6 flex items-center gap-2">
               <ClockIcon className="w-4 h-4 text-zinc-600" /> Analog Dial
             </h3>
 
@@ -265,13 +265,13 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
           If you go to sleep <span className="text-white font-bold">right now</span>, set your alarm for one of these wake-up times to align with 90-minute REM sleep cycles:
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
           {sleepTimes.map((item, idx) => (
             <div
               key={idx}
-              className="bg-white/5 border border-white/5 rounded-2xl p-4 text-center hover:bg-white/10 transition-all cursor-pointer group"
+              className="bg-white/5 border border-white/5 rounded-2xl p-3 md:p-4 text-center hover:bg-white/10 active:scale-95 transition-all cursor-pointer group"
             >
-              <div className="text-xs font-semibold text-zinc-500 mb-1">{item.hours} Hours ({item.cycles} cycles)</div>
+              <div className="text-[10px] md:text-xs font-semibold text-zinc-500 mb-1">{item.hours} Hours <span className="hidden sm:inline">({item.cycles} cycles)</span></div>
               <div className="text-xl sm:text-2xl font-bold text-zinc-300 group-hover:text-white transition-colors">
                 {item.time}
               </div>
