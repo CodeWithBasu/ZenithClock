@@ -54,7 +54,7 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Top Banner */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-zinc-950/50 border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-transparent border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
         <div className="flex items-center gap-3">
           <div className="p-3 rounded-2xl bg-white/5 text-white border border-white/5">
             <Globe className="w-6 h-6" />
@@ -80,7 +80,7 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
 
       {/* Interactive Timezone Converter Slider */}
       {showConverter && (
-        <div className="bg-black/20 border border-white/5 p-6 rounded-3xl backdrop-blur-xl space-y-4 animate-fadeIn">
+        <div className="bg-transparent border border-white/5 p-6 rounded-3xl backdrop-blur-xl space-y-4 animate-fadeIn">
           <div className="flex items-center justify-between text-xs font-bold text-zinc-400">
             <span className="flex items-center gap-2">
               <Sliders className="w-4 h-4 text-white" /> Preview Hour Across Timezones
@@ -131,7 +131,7 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
       )}
 
       {/* World Map Visualizer Graphic */}
-      <div className="bg-zinc-950/50 border border-white/5 rounded-3xl p-6 backdrop-blur-xl relative overflow-hidden text-center">
+      <div className="bg-transparent border border-white/5 rounded-3xl p-6 backdrop-blur-xl relative overflow-hidden text-center">
         <div className="text-xs font-bold tracking-widest text-zinc-500 uppercase mb-4 flex items-center justify-center gap-2">
           <MapPin className="w-4 h-4 text-white" /> Interactive Day / Night Globe Visualizer
         </div>
