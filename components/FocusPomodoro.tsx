@@ -99,7 +99,7 @@ export default function FocusPomodoro({ ambientSound, setAmbientSound }: FocusPo
   const randomQuote = quotes[completedSessions % quotes.length];
 
   return (
-    <div className="h-full flex flex-col space-y-2 animate-fadeIn overflow-hidden pb-2">
+    <div className="h-auto md:h-full flex flex-col space-y-4 md:space-y-2 animate-fadeIn overflow-hidden pb-2">
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
         <div className="flex items-center gap-3">

@@ -72,7 +72,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
   const isNight = hours < 6 || hours >= 19;
 
   return (
-    <div className="h-full flex flex-col justify-between space-y-2 animate-fadeIn pb-2">
+    <div className="h-auto md:h-full flex flex-col justify-between space-y-4 md:space-y-2 animate-fadeIn pb-2">
       {/* Clock Mode Controls */}
       <div className="flex flex-wrap items-center justify-between gap-4 bg-black/20 border border-white/5 p-3 rounded-2xl backdrop-blur-md">
         <div className="flex items-center gap-2">
