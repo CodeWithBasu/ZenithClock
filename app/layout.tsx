@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   description: "A smart brilliant clock with immersive amazing features including alarms, world time, timer, and stopwatch.",
   keywords: ["clock", "smart clock", "world time", "timer", "stopwatch", "pomodoro", "focus mode"],
   authors: [{ name: "CodeWithBasu" }],
+  icons: {
+    icon: "/fevico.ico",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
