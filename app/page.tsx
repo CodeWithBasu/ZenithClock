@@ -90,7 +90,7 @@ export default function Home() {
   }, [theme]);
 
   return (
-    <main className="min-h-screen text-[#FFE5F1] relative font-sans selection:bg-white selection:text-[#010030] pb-16">
+    <main className="h-screen overflow-hidden text-[#FFE5F1] relative font-sans selection:bg-white selection:text-[#010030] flex flex-col">
       {/* HTML5 Canvas Ambient Particle Background */}
       <DynamicBackground theme={theme} />
 
@@ -106,7 +106,7 @@ export default function Home() {
       />
 
       {/* Content Container */}
-      <div className="max-w-7xl mx-auto px-4 pt-8">
+      <div className="flex-1 w-full max-w-7xl mx-auto px-4 py-4 md:py-6 overflow-hidden flex flex-col">
         {activeTab === 'clock' && (
           <ClockSection format12h={format12h} setFormat12h={setFormat12h} />
         )}
