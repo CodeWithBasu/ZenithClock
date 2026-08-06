@@ -90,7 +90,7 @@ export default function Home() {
   }, [theme]);
 
   return (
-    <main className="min-h-screen text-slate-100 relative font-sans selection:bg-cyan-500 selection:text-white pb-16">
+    <main className="min-h-screen text-[#FFE5F1] relative font-sans selection:bg-[#F042FF] selection:text-[#010030] pb-16">
       {/* HTML5 Canvas Ambient Particle Background */}
       <DynamicBackground theme={theme} />
 
