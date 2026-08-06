@@ -142,13 +142,13 @@ export default function Home() {
       </div>
 
       {/* Bottom Navigation Bar (Mobile Only) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-3xl border-t border-white/10 pb-safe h-20 rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-3xl border-t border-white/5 pb-safe h-[72px] rounded-t-[2rem]">
         <div className="relative flex items-center h-full px-2">
           {/* Animated Sliding Indicator Circle */}
           <div
-            className="absolute top-[-24px] w-14 h-14 rounded-full bg-white shadow-[0_8px_16px_rgba(255,255,255,0.2)] transition-all duration-500 ease-[cubic-bezier(0.68,-0.55,0.26,1.55)] z-10 border-[6px] border-[#09090b]"
+            className="absolute top-[-18px] w-12 h-12 rounded-full bg-white shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-500 ease-[cubic-bezier(0.68,-0.55,0.26,1.55)] z-10"
             style={{
-              left: `calc(${(tabs.findIndex(t => t.id === activeTab) * (100 / tabs.length))}% + ${(100 / tabs.length) / 2}% - 28px)`
+              left: `calc(${(tabs.findIndex(t => t.id === activeTab) * (100 / tabs.length))}% + ${(100 / tabs.length) / 2}% - 24px)`
             }}
           />
 
@@ -164,15 +164,15 @@ export default function Home() {
                 <div
                   className={`p-3 rounded-full transition-all duration-500 ${
                     isActive
-                      ? '-translate-y-8 text-black scale-110'
-                      : 'translate-y-0 text-zinc-500 group-hover:text-white'
+                      ? '-translate-y-7 text-black scale-100'
+                      : 'translate-y-0 text-white/40 group-hover:text-white/70'
                   }`}
                 >
-                  <Icon className="w-6 h-6" />
+                  <Icon className="w-5 h-5" />
                 </div>
                 <span
-                  className={`absolute bottom-2 text-[10px] font-bold tracking-wide transition-all duration-500 ${
-                    isActive ? 'opacity-100 translate-y-0 text-white' : 'opacity-0 translate-y-4 text-zinc-500'
+                  className={`absolute bottom-2.5 text-[9px] font-semibold tracking-wider transition-all duration-500 ${
+                    isActive ? 'opacity-100 translate-y-0 text-white' : 'opacity-0 translate-y-2 text-white/30'
                   }`}
                 >
                   {tab.label}
