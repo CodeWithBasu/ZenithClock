@@ -116,7 +116,7 @@ export default function TimerSection() {
   ];
 
   return (
-    <div className="space-y-8 animate-fadeIn">
+    <div className="h-full flex flex-col space-y-2 animate-fadeIn overflow-hidden pb-2">
       {/* Top Banner */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
         <div className="flex items-center gap-3">
@@ -157,8 +157,10 @@ export default function TimerSection() {
         })}
       </div>
 
-      {/* Active Timers Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar">
+        {/* Main Grid: Timer Display + Settings */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
         {timers.map((t) => {
           const progress = ((t.totalSeconds - t.remainingSeconds) / t.totalSeconds) * 100;
           const isDone = t.remainingSeconds === 0;
@@ -243,6 +245,7 @@ export default function TimerSection() {
             </div>
           );
         })}
+        </div>
       </div>
 
       {/* Add Custom Timer Modal */}
