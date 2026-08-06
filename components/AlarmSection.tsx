@@ -136,9 +136,9 @@ export default function AlarmSection({ alarms, setAlarms }: AlarmSectionProps) {
   };
 
   return (
-    <div className="space-y-6 animate-fadeIn">
+    <div className="h-full flex flex-col space-y-2 animate-fadeIn overflow-hidden pb-2">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border border-white/5 p-6 rounded-3xl backdrop-blur-xl">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border border-white/5 p-4 rounded-3xl backdrop-blur-xl shrink-0">
         <div className="flex items-center gap-3">
           <div className="p-3 rounded-2xl bg-white/5 text-white border border-white/5">
             <AlarmClock className="w-6 h-6" />
@@ -158,7 +158,7 @@ export default function AlarmSection({ alarms, setAlarms }: AlarmSectionProps) {
       </div>
 
       {/* Alarms List */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="flex-1 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-4 content-start pr-2 custom-scrollbar">
         {alarms.length === 0 ? (
           <div className="col-span-full py-16 text-center bg-white/5 border border-dashed border-white/10 rounded-3xl">
             <BellOff className="w-10 h-10 text-slate-500 mx-auto mb-3" />
