@@ -15,13 +15,14 @@ type AnimatedThemeTogglerProps = {
 
 export const AnimatedThemeToggler = ({ className }: AnimatedThemeTogglerProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const [darkMode, setDarkMode] = useState(() =>
-    typeof window !== "undefined"
-      ? document.documentElement.classList.contains("dark")
-      : true // ZenithClock defaults to dark
-  )
+  const [mounted, setMounted] = useState(false)
+  const [darkMode, setDarkMode] = useState(true)
 
   useEffect(() => {
+    setMounted(true)
+    const isDark = document.documentElement.classList.contains("dark")
+    setDarkMode(isDark)
+
     const syncTheme = () =>
       setDarkMode(document.documentElement.classList.contains("dark"))
 
@@ -76,6 +77,22 @@ export const AnimatedThemeToggler = ({ className }: AnimatedThemeTogglerProps) =
       }
     )
   }, [darkMode])
+
+  // Prevent hydration mismatch by returning a placeholder or empty container on the server
+  if (!mounted) {
+    return (
+      <button
+        aria-label="Switch theme"
+        className={cn(
+          "flex items-center justify-center p-2 rounded-full outline-none focus:outline-none active:outline-none focus:ring-0 cursor-pointer opacity-0",
+          className
+        )}
+        type="button"
+      >
+        <span className="w-6 h-6" />
+      </button>
+    )
+  }
 
   return (
     <button
