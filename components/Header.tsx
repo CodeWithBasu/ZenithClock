@@ -28,6 +28,8 @@ interface HeaderProps {
   onOpenSettings: () => void;
 }
 
+import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler';
+
 export default function Header({
   activeTab,
   setActiveTab,
@@ -129,7 +131,11 @@ export default function Header({
 
         {/* Controls Header */}
         <div className="flex items-center gap-2">
-
+          
+          {/* Animated Theme Toggler */}
+          <div className="hidden sm:block">
+            <AnimatedThemeToggler className="p-2.5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all" />
+          </div>
 
           {/* Settings Modal Toggle */}
           <button
