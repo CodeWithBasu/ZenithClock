@@ -9,6 +9,7 @@ interface RandomLetterSwapProps {
   reverse?: boolean;
   staggerDuration?: number;
   transition?: any;
+  isHovered?: boolean;
 }
 
 export function RandomLetterSwap({
@@ -16,15 +17,17 @@ export function RandomLetterSwap({
   className = "",
   reverse = false,
   staggerDuration = 0.02,
-  transition = { duration: 0.65, type: "spring" }
+  transition = { duration: 0.65, type: "spring" },
+  isHovered: controlledIsHovered,
 }: RandomLetterSwapProps) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [internalHover, setInternalHover] = useState(false);
+  const isHovered = controlledIsHovered !== undefined ? controlledIsHovered : internalHover;
 
   return (
     <motion.span
       className={`inline-flex overflow-hidden ${className}`}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      onHoverStart={() => setInternalHover(true)}
+      onHoverEnd={() => setInternalHover(false)}
     >
       {label.split("").map((char, i) => {
         const displayChar = char === " " ? "\u00A0" : char;
