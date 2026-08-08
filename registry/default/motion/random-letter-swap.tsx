@@ -48,8 +48,9 @@ export function RandomLetterSwap({
           clearInterval(interval);
         }
         
-        iteration += 0.03 / staggerDuration; 
-      }, 30);
+        // At 50ms per tick (0.05s), increment iteration so it takes staggerDuration per letter
+        iteration += 0.015 / staggerDuration; 
+      }, 50);
     } else {
       setDisplayText(label);
     }
