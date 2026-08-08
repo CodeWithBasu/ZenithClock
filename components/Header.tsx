@@ -126,7 +126,7 @@ export default function Header({
                 <Icon className={`w-3.5 h-3.5 ${isActive ? 'opacity-100' : 'opacity-70'}`} />
                 <RandomLetterSwap 
                   label={tab.label}
-                  staggerDuration={0.02}
+                  staggerDuration={0.05}
                   transition={{ duration: 0.65, type: "spring" }}
                 />
               </button>
