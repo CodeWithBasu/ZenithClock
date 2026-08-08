@@ -29,6 +29,7 @@ interface HeaderProps {
 }
 
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler';
+import { RandomLetterSwap } from '@/registry/default/motion/random-letter-swap';
 
 export default function Header({
   activeTab,
@@ -123,7 +124,11 @@ export default function Header({
                 }`}
               >
                 <Icon className={`w-3.5 h-3.5 ${isActive ? 'opacity-100' : 'opacity-70'}`} />
-                {tab.label}
+                <RandomLetterSwap 
+                  label={tab.label}
+                  staggerDuration={0.02}
+                  transition={{ duration: 0.65, type: "spring" }}
+                />
               </button>
             );
           })}
