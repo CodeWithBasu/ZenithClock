@@ -31,6 +31,32 @@ interface HeaderProps {
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler';
 import { RandomLetterSwap } from '@/registry/default/motion/random-letter-swap';
 
+function TabButton({ tab, isActive, onClick }: { tab: any, isActive: boolean, onClick: () => void }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const Icon = tab.icon;
+  
+  return (
+    <button
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
+      className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-xs transition-all whitespace-nowrap ${
+        isActive
+          ? 'bg-white dark:bg-white/10 text-zinc-900 dark:text-white shadow-sm'
+          : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
+      }`}
+    >
+      <Icon className={`w-3.5 h-3.5 ${isActive ? 'opacity-100' : 'opacity-70'}`} />
+      <RandomLetterSwap 
+        label={tab.label}
+        staggerDuration={0.05}
+        transition={{ duration: 0.65, type: "spring" }}
+        isHovered={isHovered}
+      />
+    </button>
+  );
+}
+
 export default function Header({
   activeTab,
   setActiveTab,
@@ -108,28 +134,16 @@ export default function Header({
         {/* Tab Navigation (Desktop Only) */}
         <nav className="hidden md:flex items-center gap-1 bg-black/5 dark:bg-white/5 p-1 rounded-2xl border border-black/5 dark:border-white/5 overflow-x-auto max-w-full">
           {tabs.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
             return (
-              <button
+              <TabButton 
                 key={tab.id}
+                tab={tab}
+                isActive={activeTab === tab.id}
                 onClick={() => {
                   audioSynth.playClick();
                   setActiveTab(tab.id);
                 }}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-xs transition-all whitespace-nowrap ${
-                  isActive
-                    ? 'bg-white dark:bg-white/10 text-zinc-900 dark:text-white shadow-sm'
-                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
-                }`}
-              >
-                <Icon className={`w-3.5 h-3.5 ${isActive ? 'opacity-100' : 'opacity-70'}`} />
-                <RandomLetterSwap 
-                  label={tab.label}
-                  staggerDuration={0.05}
-                  transition={{ duration: 0.65, type: "spring" }}
-                />
-              </button>
+              />
             );
           })}
         </nav>
