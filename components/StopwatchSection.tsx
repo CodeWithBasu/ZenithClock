@@ -107,35 +107,35 @@ export default function StopwatchSection() {
   return (
     <div className="h-auto md:h-full flex flex-col space-y-4 md:space-y-2 animate-fadeIn overflow-hidden pb-2">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border-b md:border border-white/5 p-4 md:p-6 rounded-none md:rounded-3xl md:backdrop-blur-xl">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-transparent border-b md:border border-black/5 dark:border-white/5 p-4 md:p-6 rounded-none md:rounded-3xl md:backdrop-blur-xl">
         <div className="flex items-center gap-3 w-full sm:w-auto text-center sm:text-left">
-          <div className="p-3 rounded-2xl bg-white/5 text-white border border-white/5">
+          <div className="p-3 rounded-2xl bg-black/5 dark:bg-white/5 text-zinc-900 dark:text-white border border-black/5 dark:border-white/5">
             <TimerReset className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-xl font-extrabold text-white">Precision Stopwatch</h2>
-            <p className="text-xs text-zinc-400">Millisecond accurate stopwatch with lap analytics & CSV export.</p>
+            <h2 className="text-xl font-extrabold text-zinc-900 dark:text-white">Precision Stopwatch</h2>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">Millisecond accurate stopwatch with lap analytics & CSV export.</p>
           </div>
         </div>
 
         {laps.length > 0 && (
           <button
             onClick={exportCSV}
-            className="flex items-center justify-center w-full sm:w-auto gap-2 px-4 py-2.5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 text-white font-bold text-xs transition-all active:scale-95"
+            className="flex items-center justify-center w-full sm:w-auto gap-2 px-4 py-2.5 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-zinc-900 dark:text-white font-bold text-xs transition-all active:scale-95"
           >
-            <Download className="w-4 h-4 text-white" /> Export Laps CSV
+            <Download className="w-4 h-4 text-zinc-900 dark:text-white" /> Export Laps CSV
           </button>
         )}
       </div>
 
       {/* Main Stopwatch Card */}
-      <div className="bg-transparent border border-white/5 rounded-[2rem] p-6 md:p-12 md:backdrop-blur-2xl flex flex-col items-center justify-center relative overflow-hidden group">
+      <div className="bg-transparent border border-black/5 dark:border-white/5 rounded-[2rem] p-6 md:p-12 md:backdrop-blur-2xl flex flex-col items-center justify-center relative overflow-hidden group">
         <div className="text-zinc-500 font-bold tracking-widest text-[10px] md:text-xs uppercase mb-4 flex items-center gap-2">
-          <Sparkles className="w-4 h-4" /> Millisecond Counter
+          <Sparkles className="w-4 h-4 text-zinc-500 dark:text-zinc-500" /> Millisecond Counter
         </div>
 
         {/* Display Digits */}
-        <div className="flex items-baseline justify-center gap-1 sm:gap-2 my-6">
+        <div className="flex items-baseline justify-center gap-1 sm:gap-2 my-6 text-zinc-900 dark:text-white">
           <span className="text-[5.5rem] leading-none sm:text-8xl md:text-9xl font-extrabold font-hud tracking-widest drop-shadow-lg">
             {formatted.main}
           </span>
@@ -150,25 +150,25 @@ export default function StopwatchSection() {
             onClick={toggleStartPause}
             className={`flex items-center justify-center flex-1 gap-2 py-3 md:py-4 rounded-2xl font-extrabold text-sm md:text-base shadow-sm transition-all active:scale-95 ${
               isRunning
-                ? 'bg-white/10 text-white border border-white/10 hover:bg-white/20'
-                : 'bg-white text-black hover:bg-zinc-200'
+                ? 'bg-black/5 dark:bg-white/10 text-zinc-900 dark:text-white border border-black/10 dark:border-white/10 hover:bg-black/10 dark:hover:bg-white/20'
+                : 'bg-black dark:bg-white text-white dark:text-black hover:bg-zinc-800 dark:hover:bg-zinc-200'
             }`}
           >
-            {isRunning ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 fill-black" />}
+            {isRunning ? <Pause className="w-5 h-5" /> : <Play className={`w-5 h-5 ${isRunning ? '' : 'fill-white dark:fill-black'}`} />}
             {isRunning ? 'Pause' : 'Start'}
           </button>
 
           <button
             onClick={handleLap}
             disabled={!isRunning}
-            className="flex items-center justify-center flex-1 gap-2 py-3 md:py-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 disabled:opacity-40 text-white font-bold text-sm md:text-base transition-all active:scale-95"
+            className="flex items-center justify-center flex-1 gap-2 py-3 md:py-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 hover:bg-black/10 dark:hover:bg-white/10 disabled:opacity-40 text-zinc-900 dark:text-white font-bold text-sm md:text-base transition-all active:scale-95"
           >
-            <Flag className="w-5 h-5 text-white" /> Lap
+            <Flag className="w-5 h-5 text-zinc-900 dark:text-white" /> Lap
           </button>
 
           <button
             onClick={handleReset}
-            className="p-3 md:p-4 rounded-2xl bg-white/5 border border-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-all active:scale-95"
+            className="p-3 md:p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-all active:scale-95"
           >
             <RotateCcw className="w-5 h-5" />
           </button>
@@ -178,43 +178,43 @@ export default function StopwatchSection() {
       {/* Lap Stats & Analytics Header */}
       {laps.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-black/20 border border-white/5 p-4 rounded-2xl backdrop-blur-xl flex items-center justify-between">
+          <div className="bg-black/5 dark:bg-black/20 border border-black/5 dark:border-white/5 p-4 rounded-2xl backdrop-blur-xl flex items-center justify-between">
             <div>
-              <div className="text-[11px] font-bold uppercase text-white">Fastest Lap</div>
-              <div className="text-xl font-extrabold font-mono text-white">
+              <div className="text-[11px] font-bold uppercase text-zinc-900 dark:text-white">Fastest Lap</div>
+              <div className="text-xl font-extrabold font-mono text-zinc-900 dark:text-white">
                 {formatMs(minLapMs).main}.{formatMs(minLapMs).ms}
               </div>
             </div>
-            <Award className="w-6 h-6 text-white" />
+            <Award className="w-6 h-6 text-zinc-900 dark:text-white" />
           </div>
 
-          <div className="bg-black/20 border border-white/5 p-4 rounded-2xl backdrop-blur-xl flex items-center justify-between">
+          <div className="bg-black/5 dark:bg-black/20 border border-black/5 dark:border-white/5 p-4 rounded-2xl backdrop-blur-xl flex items-center justify-between">
             <div>
               <div className="text-[11px] font-bold uppercase text-zinc-500">Slowest Lap</div>
-              <div className="text-xl font-extrabold font-mono text-white">
+              <div className="text-xl font-extrabold font-mono text-zinc-900 dark:text-white">
                 {formatMs(maxLapMs).main}.{formatMs(maxLapMs).ms}
               </div>
             </div>
             <TrendingUp className="w-6 h-6 text-zinc-500" />
           </div>
 
-          <div className="bg-black/20 border border-white/5 p-4 rounded-2xl backdrop-blur-xl flex items-center justify-between">
+          <div className="bg-black/5 dark:bg-black/20 border border-black/5 dark:border-white/5 p-4 rounded-2xl backdrop-blur-xl flex items-center justify-between">
             <div>
-              <div className="text-[11px] font-bold uppercase text-zinc-400">Average Lap</div>
-              <div className="text-xl font-extrabold font-mono text-white">
+              <div className="text-[11px] font-bold uppercase text-zinc-500 dark:text-zinc-400">Average Lap</div>
+              <div className="text-xl font-extrabold font-mono text-zinc-900 dark:text-white">
                 {formatMs(avgLapMs).main}.{formatMs(avgLapMs).ms}
               </div>
             </div>
-            <Sparkles className="w-6 h-6 text-zinc-400" />
+            <Sparkles className="w-6 h-6 text-zinc-500 dark:text-zinc-400" />
           </div>
         </div>
       )}
 
       {/* Scrollable Lap Table */}
       {laps.length > 0 && (
-        <div className="flex-1 overflow-y-auto bg-transparent border border-white/5 rounded-[2rem] p-4 md:p-6 md:backdrop-blur-xl custom-scrollbar">
-          <h3 className="text-sm md:text-base font-bold text-white mb-4 flex items-center gap-2">
-            <Flag className="w-4 h-4 text-white" /> Lap History Breakdown
+        <div className="flex-1 overflow-y-auto bg-transparent border border-black/5 dark:border-white/5 rounded-[2rem] p-4 md:p-6 md:backdrop-blur-xl custom-scrollbar">
+          <h3 className="text-sm md:text-base font-bold text-zinc-900 dark:text-white mb-4 flex items-center gap-2">
+            <Flag className="w-4 h-4 text-zinc-900 dark:text-white" /> Lap History Breakdown
           </h3>
 
           <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
@@ -230,16 +230,16 @@ export default function StopwatchSection() {
                   key={l.id}
                   className={`flex items-center justify-between p-3.5 rounded-2xl border text-xs font-mono transition-all ${
                     isFastest
-                      ? 'bg-white/10 border-white/20 text-white'
+                      ? 'bg-black/10 dark:bg-white/10 border-black/20 dark:border-white/20 text-zinc-900 dark:text-white'
                       : isSlowest
-                      ? 'bg-black/20 border-white/5 text-zinc-500'
-                      : 'bg-white/5 border-white/5 text-zinc-400'
+                      ? 'bg-black/5 dark:bg-black/20 border-black/5 dark:border-white/5 text-zinc-500'
+                      : 'bg-white/70 dark:bg-white/5 border-black/5 dark:border-white/5 text-zinc-600 dark:text-zinc-400'
                   }`}
                 >
                   <div className="flex items-center gap-3 font-bold">
                     <span>Lap #{l.id}</span>
-                    {isFastest && <span className="text-[10px] px-2 py-0.5 rounded bg-white/20 text-white font-sans">Fastest</span>}
-                    {isSlowest && <span className="text-[10px] px-2 py-0.5 rounded bg-black text-zinc-500 border border-white/10 font-sans">Slowest</span>}
+                    {isFastest && <span className="text-[10px] px-2 py-0.5 rounded bg-black/10 dark:bg-white/20 text-zinc-900 dark:text-white font-sans">Fastest</span>}
+                    {isSlowest && <span className="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-black text-zinc-500 border border-black/10 dark:border-white/10 font-sans">Slowest</span>}
                   </div>
 
                   <div className="flex items-center gap-6 font-bold">

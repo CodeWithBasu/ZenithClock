@@ -86,16 +86,16 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-2xl bg-black/40 border-b border-white/5 px-4 py-3 shadow-sm transition-all">
+    <header className="sticky top-0 z-40 backdrop-blur-2xl bg-white/70 dark:bg-black/40 border-b border-black/5 dark:border-white/5 px-4 py-3 shadow-sm transition-all">
       <div className="max-w-7xl mx-auto flex flex-row items-center justify-between gap-4 w-full">
         
         {/* Brand Header */}
         <div className="flex items-center gap-3">
-          <div className="relative p-2 rounded-xl bg-white/10 border border-white/5 shadow-sm">
-            <Sparkles className="w-5 h-5 text-white" />
+          <div className="relative p-2 rounded-xl bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/5 shadow-sm">
+            <Sparkles className="w-5 h-5 text-zinc-900 dark:text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold tracking-widest text-white transition-all">
+            <h1 className="text-xl font-extrabold tracking-widest text-zinc-900 dark:text-white transition-all">
               {isMobile ? 'CHRONO' : 'CHRONOPULSE'}
             </h1>
             <p className="text-[9px] uppercase font-semibold tracking-[0.2em] text-zinc-500">
@@ -105,7 +105,7 @@ export default function Header({
         </div>
 
         {/* Tab Navigation (Desktop Only) */}
-        <nav className="hidden md:flex items-center gap-1 bg-white/5 p-1 rounded-2xl border border-white/5 overflow-x-auto max-w-full">
+        <nav className="hidden md:flex items-center gap-1 bg-black/5 dark:bg-white/5 p-1 rounded-2xl border border-black/5 dark:border-white/5 overflow-x-auto max-w-full">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -118,8 +118,8 @@ export default function Header({
                 }}
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-xs transition-all whitespace-nowrap ${
                   isActive
-                    ? 'bg-white/10 text-white shadow-sm'
-                    : 'text-zinc-500 hover:text-white hover:bg-white/5'
+                    ? 'bg-white dark:bg-white/10 text-zinc-900 dark:text-white shadow-sm'
+                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
                 }`}
               >
                 <Icon className={`w-3.5 h-3.5 ${isActive ? 'opacity-100' : 'opacity-70'}`} />
@@ -134,14 +134,14 @@ export default function Header({
           
           {/* Animated Theme Toggler */}
           <div>
-            <AnimatedThemeToggler className="p-2.5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all" />
+            <AnimatedThemeToggler className="p-2.5 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all" />
           </div>
 
           {/* Settings Modal Toggle */}
           <button
             onClick={onOpenSettings}
             title="Database & Preferences Settings"
-            className="p-2.5 rounded-xl bg-white/5 border border-white/5 text-zinc-400 hover:bg-white/10 hover:text-white transition-all"
+            className="p-2.5 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-zinc-500 dark:text-zinc-400 hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white transition-all"
           >
             <Settings className="w-4 h-4" />
           </button>

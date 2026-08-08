@@ -54,14 +54,14 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
   return (
     <div className="h-auto md:h-full flex flex-col space-y-4 md:space-y-2 animate-fadeIn overflow-hidden pb-2">
       {/* Top Banner */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-transparent border-b md:border border-white/5 p-4 rounded-none md:rounded-3xl md:backdrop-blur-xl shrink-0">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-transparent border-b md:border border-black/5 dark:border-white/5 p-4 rounded-none md:rounded-3xl md:backdrop-blur-xl shrink-0">
         <div className="flex items-center gap-3 w-full sm:w-auto text-center sm:text-left">
-          <div className="p-3 rounded-2xl bg-white/5 text-white border border-white/5">
+          <div className="p-3 rounded-2xl bg-black/5 dark:bg-white/5 text-zinc-900 dark:text-white border border-black/5 dark:border-white/5">
             <Globe className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-xl font-extrabold text-white">Global World Time</h2>
-            <p className="text-xs text-zinc-400">Explore real-time timezones, day/night cycles, and timezone converters worldwide.</p>
+            <h2 className="text-xl font-extrabold text-zinc-900 dark:text-white">Global World Time</h2>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">Explore real-time timezones, day/night cycles, and timezone converters worldwide.</p>
           </div>
         </div>
 
@@ -69,8 +69,8 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
           onClick={() => setShowConverter(!showConverter)}
           className={`flex items-center justify-center w-full sm:w-auto gap-2 px-4 py-2.5 rounded-2xl font-bold text-xs border transition-all active:scale-95 ${
             showConverter
-              ? 'bg-white text-black border-white shadow-sm'
-              : 'bg-white/5 border-white/5 text-zinc-400 hover:bg-white/10 hover:text-white'
+              ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+              : 'bg-black/5 dark:bg-white/5 border-black/5 dark:border-white/5 text-zinc-600 dark:text-zinc-400 hover:bg-black/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white'
           }`}
         >
           <Sliders className="w-4 h-4" />
@@ -80,12 +80,12 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
 
       {/* Interactive Timezone Converter Slider */}
       {showConverter && (
-        <div className="bg-transparent border border-white/5 p-6 rounded-3xl backdrop-blur-xl space-y-4 animate-fadeIn">
-          <div className="flex items-center justify-between text-xs font-bold text-zinc-400">
+        <div className="bg-transparent border border-black/5 dark:border-white/5 p-6 rounded-3xl backdrop-blur-xl space-y-4 animate-fadeIn">
+          <div className="flex items-center justify-between text-xs font-bold text-zinc-600 dark:text-zinc-400">
             <span className="flex items-center gap-2">
-              <Sliders className="w-4 h-4 text-white" /> Preview Hour Across Timezones
+              <Sliders className="w-4 h-4 text-zinc-900 dark:text-white" /> Preview Hour Across Timezones
             </span>
-            <span className="text-white font-mono text-base">{converterHour}:00</span>
+            <span className="text-zinc-900 dark:text-white font-mono text-base">{converterHour}:00</span>
           </div>
 
           <input
@@ -94,7 +94,7 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
             max="23"
             value={converterHour}
             onChange={(e) => setConverterHour(parseInt(e.target.value, 10))}
-            className="w-full h-2.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-white"
+            className="w-full h-2.5 bg-black/10 dark:bg-white/10 rounded-lg appearance-none cursor-pointer accent-black dark:accent-white"
           />
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
@@ -107,19 +107,19 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
               return (
                 <div
                   key={cityObj.city}
-                  className="bg-white/5 border border-white/5 p-3 rounded-2xl flex items-center justify-between"
+                  className="bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 p-3 rounded-2xl flex items-center justify-between"
                 >
                   <div>
-                    <div className="text-xs font-bold text-white flex items-center gap-1">
+                    <div className="text-xs font-bold text-zinc-900 dark:text-white flex items-center gap-1">
                       <span>{cityObj.flag}</span> {cityObj.city}
                     </div>
                     <div className="text-[10px] text-zinc-500">UTC {cityTime?.offset}</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-mono font-bold text-zinc-300">
+                    <div className="text-sm font-mono font-bold text-zinc-700 dark:text-zinc-300">
                       {previewHour.toString().padStart(2, '0')}:00
                     </div>
-                    <div className="text-[10px] text-zinc-400">
+                    <div className="text-[10px] text-zinc-600 dark:text-zinc-400">
                       {isNightPreview ? '🌙 Night' : '☀️ Day'}
                     </div>
                   </div>
@@ -131,15 +131,15 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
       )}
 
       {/* World Map Visualizer Graphic */}
-      <div className="bg-transparent border border-white/5 rounded-3xl p-6 backdrop-blur-xl relative overflow-hidden text-center">
-        <div className="text-xs font-bold tracking-widest text-zinc-500 uppercase mb-4 flex items-center justify-center gap-2">
-          <MapPin className="w-4 h-4 text-white" /> Interactive Day / Night Globe Visualizer
+      <div className="bg-transparent border border-black/5 dark:border-white/5 rounded-3xl p-6 backdrop-blur-xl relative overflow-hidden text-center">
+        <div className="text-xs font-bold tracking-widest text-zinc-600 dark:text-zinc-500 uppercase mb-4 flex items-center justify-center gap-2">
+          <MapPin className="w-4 h-4 text-zinc-900 dark:text-white" /> Interactive Day / Night Globe Visualizer
         </div>
 
         {/* Minimal Stylized Map Projection */}
-        <div className="w-full h-44 bg-black rounded-2xl border border-white/5 relative overflow-hidden flex items-center justify-center">
+        <div className="w-full h-44 bg-zinc-200 dark:bg-black rounded-2xl border border-black/10 dark:border-white/5 relative overflow-hidden flex items-center justify-center">
           {/* Day/Night terminator gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-white/5 to-black/20 opacity-70 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/50 via-black/5 to-white/50 dark:from-black/20 dark:via-white/5 dark:to-black/20 opacity-70 pointer-events-none" />
 
           <div className="grid grid-cols-6 sm:grid-cols-10 gap-2 p-4 relative z-10 w-full">
             {WORLD_CITIES.map((cityObj) => {
@@ -152,10 +152,10 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
                   onClick={() => togglePin(cityObj.city)}
                   className={`p-2 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 active:scale-90 ${
                     isPinned
-                      ? 'bg-white border-white text-black shadow-sm'
+                      ? 'bg-black dark:bg-white border-black dark:border-white text-white dark:text-black shadow-sm'
                       : cityTime?.isNight
-                      ? 'bg-zinc-900 border-white/5 text-zinc-500'
-                      : 'bg-white/5 border-white/10 text-zinc-300'
+                      ? 'bg-zinc-300 dark:bg-zinc-900 border-black/10 dark:border-white/5 text-zinc-500'
+                      : 'bg-white/50 dark:bg-white/5 border-black/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300'
                   }`}
                 >
                   <div className="text-base">{cityObj.flag}</div>
@@ -177,7 +177,7 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
             placeholder="Search city or country..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white/5 border border-white/5 rounded-2xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white"
+            className="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/5 rounded-2xl pl-10 pr-4 py-2.5 text-xs text-zinc-900 dark:text-white placeholder-zinc-500 focus:outline-none focus:border-black dark:focus:border-white"
           />
         </div>
 
@@ -189,8 +189,8 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
               onClick={() => setSelectedRegion(reg)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all active:scale-95 ${
                 selectedRegion === reg
-                  ? 'bg-white text-black border border-white'
-                  : 'bg-white/5 border border-white/5 text-zinc-500 hover:text-white hover:bg-white/10'
+                  ? 'bg-black dark:bg-white text-white dark:text-black border border-black dark:border-white'
+                  : 'bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/5 text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/10'
               }`}
             >
               {reg}
@@ -212,18 +212,18 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
               key={cityObj.city}
               className={`p-4 md:p-5 rounded-[2rem] border md:backdrop-blur-xl transition-all relative overflow-hidden group ${
                 isPinned
-                  ? 'bg-zinc-950/80 border-white/10 shadow-sm'
-                  : 'bg-black/20 border-white/5 hover:border-white/10'
+                  ? 'bg-white/80 dark:bg-zinc-950/80 border-black/10 dark:border-white/10 shadow-sm'
+                  : 'bg-black/5 dark:bg-black/20 border-black/5 dark:border-white/5 hover:border-black/10 dark:hover:border-white/10'
               }`}
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-2.5">
                   <span className="text-3xl">{cityObj.flag}</span>
                   <div>
-                    <h3 className="text-base font-extrabold text-white group-hover:text-zinc-300 transition-colors">
+                    <h3 className="text-base font-extrabold text-zinc-900 dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
                       {cityObj.city}
                     </h3>
-                    <p className="text-xs text-zinc-500">{cityObj.country}</p>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-500">{cityObj.country}</p>
                   </div>
                 </div>
 
@@ -231,25 +231,25 @@ export default function WorldTimeSection({ pinnedCities, setPinnedCities }: Worl
                   onClick={() => togglePin(cityObj.city)}
                   className={`p-2 rounded-xl border transition-all active:scale-90 ${
                     isPinned
-                      ? 'bg-white text-black border-white'
-                      : 'bg-white/5 border-white/5 text-zinc-500 hover:text-white'
+                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                      : 'bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/5 text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                   }`}
                 >
-                  {isPinned ? <Pin className="w-3.5 h-3.5 fill-black" /> : <PinOff className="w-3.5 h-3.5" />}
+                  {isPinned ? <Pin className="w-3.5 h-3.5 fill-white dark:fill-black" /> : <PinOff className="w-3.5 h-3.5" />}
                 </button>
               </div>
 
-              <div className="flex items-baseline justify-between pt-2 border-t border-white/5">
-                <div className="text-3xl font-extrabold font-mono text-white tracking-tight">
+              <div className="flex items-baseline justify-between pt-2 border-t border-black/5 dark:border-white/5">
+                <div className="text-3xl font-extrabold font-mono text-zinc-900 dark:text-white tracking-tight">
                   {cityTime?.formatted || '--:--:--'}
                 </div>
                 <div className="flex items-center gap-1.5 text-xs font-bold">
                   {cityTime?.isNight ? (
-                    <span className="flex items-center gap-1 text-zinc-400 bg-white/5 px-2 py-0.5 rounded-lg border border-white/5">
+                    <span className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400 bg-black/5 dark:bg-white/5 px-2 py-0.5 rounded-lg border border-black/10 dark:border-white/5">
                       <Moon className="w-3 h-3" /> Night
                     </span>
                   ) : (
-                    <span className="flex items-center gap-1 text-zinc-300 bg-white/10 px-2 py-0.5 rounded-lg border border-white/10">
+                    <span className="flex items-center gap-1 text-zinc-700 dark:text-zinc-300 bg-black/10 dark:bg-white/10 px-2 py-0.5 rounded-lg border border-black/20 dark:border-white/10">
                       <Sun className="w-3 h-3" /> Day
                     </span>
                   )}

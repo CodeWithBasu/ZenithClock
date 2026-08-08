@@ -74,7 +74,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
   return (
     <div className="h-auto md:h-full flex flex-col justify-between space-y-4 md:space-y-2 animate-fadeIn pb-2">
       {/* Clock Mode Controls */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-black/20 border border-white/5 p-3 rounded-2xl backdrop-blur-md">
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-white/40 dark:bg-black/20 border border-black/5 dark:border-white/5 p-3 rounded-2xl backdrop-blur-md">
         <div className="flex items-center gap-2">
           {isNight ? <Moon className="w-5 h-5 text-zinc-400" /> : <Sun className="w-5 h-5 text-zinc-400" />}
           <span className="text-sm font-semibold text-zinc-300">
@@ -85,20 +85,20 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
         <div className="flex items-center gap-3">
           <button
             onClick={() => setFormat12h(!format12h)}
-            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/5 text-white border border-white/5 hover:bg-white/10 active:scale-95 transition-all"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-black/5 dark:bg-white/5 text-zinc-900 dark:text-white border border-black/5 dark:border-white/5 hover:bg-black/10 dark:hover:bg-white/10 active:scale-95 transition-all"
           >
             Format: {format12h ? '12-Hour' : '24-Hour'}
           </button>
 
-          <div className="flex items-center bg-white/5 rounded-xl p-1 border border-white/5">
+          <div className="flex items-center bg-black/5 dark:bg-white/5 rounded-xl p-1 border border-black/5 dark:border-white/5">
             {['both', 'digital', 'analog'].map((type) => (
               <button
                 key={type}
                 onClick={() => setClockType(type)}
                 className={`px-3 py-1 rounded-lg text-xs capitalize font-medium active:scale-95 transition-all ${
                   clockType === type
-                    ? 'bg-white text-black shadow-sm'
-                    : 'text-zinc-500 hover:text-white'
+                    ? 'bg-black text-white dark:bg-white dark:text-black shadow-sm'
+                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
                 {type}
@@ -114,7 +114,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
         {/* Digital Clock Card */}
         {(clockType === 'digital' || clockType === 'both') && (
           <div
-            className={`bg-transparent md:border border-white/5 rounded-3xl p-0 py-8 md:p-6 md:backdrop-blur-2xl text-center md:shadow-xl relative overflow-hidden group flex flex-col justify-center ${
+            className={`bg-transparent md:border border-black/5 dark:border-white/5 rounded-3xl p-0 py-8 md:p-6 md:backdrop-blur-2xl text-center md:shadow-xl relative overflow-hidden group flex flex-col justify-center ${
               clockType === 'both' ? 'lg:col-span-7' : 'lg:col-span-12'
             }`}
           >
@@ -140,20 +140,20 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
             </div>
 
             {/* Date Badge */}
-            <div className="inline-flex items-center justify-center gap-2 px-5 py-2 mt-4 md:mt-0 rounded-2xl bg-white/5 border border-white/5 text-zinc-300 text-xs md:text-sm font-medium mx-auto">
+            <div className="inline-flex items-center justify-center gap-2 px-5 py-2 mt-4 md:mt-0 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-zinc-600 dark:text-zinc-300 text-xs md:text-sm font-medium mx-auto">
               <Calendar className="w-4 h-4 text-zinc-500" />
               {dateString}
             </div>
 
             {/* Day Progress Bar */}
-            <div className="mt-4 pt-4 border-t border-white/5">
+            <div className="mt-4 pt-4 border-t border-black/5 dark:border-white/5">
               <div className="flex justify-between text-xs text-zinc-500 mb-2 font-medium">
                 <span>Day Progress</span>
-                <span className="text-white font-bold">{dayProgressPercent}%</span>
+                <span className="text-zinc-900 dark:text-white font-bold">{dayProgressPercent}%</span>
               </div>
-              <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+              <div className="w-full bg-black/5 dark:bg-white/5 h-1.5 rounded-full overflow-hidden">
                 <div
-                  className="bg-white h-full rounded-full transition-all duration-1000"
+                  className="bg-black dark:bg-white h-full rounded-full transition-all duration-1000"
                   style={{ width: `${dayProgressPercent}%` }}
                 />
               </div>
@@ -164,7 +164,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
         {/* Analog Clock Card */}
         {(clockType === 'analog' || clockType === 'both') && (
           <div
-            className={`bg-transparent md:border border-white/5 rounded-3xl p-4 md:p-6 md:backdrop-blur-2xl flex flex-col items-center justify-center md:shadow-xl relative overflow-hidden h-full ${
+            className={`bg-transparent md:border border-black/5 dark:border-white/5 rounded-3xl p-4 md:p-6 md:backdrop-blur-2xl flex flex-col items-center justify-center md:shadow-xl relative overflow-hidden h-full ${
               clockType === 'both' ? 'lg:col-span-5' : 'lg:col-span-12'
             }`}
           >
@@ -181,14 +181,14 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
                     cx="100"
                     cy="100"
                     r="92"
-                    className="fill-black stroke-white/5"
+                    className="fill-white dark:fill-black stroke-black/10 dark:stroke-white/5"
                     strokeWidth="1"
                   />
                   <circle
                     cx="100"
                     cy="100"
                     r="85"
-                    className="fill-none stroke-white/5"
+                    className="fill-none stroke-black/10 dark:stroke-white/5"
                     strokeWidth="1"
                   />
 
@@ -206,7 +206,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
                         y1={y1}
                         x2={x2}
                         y2={y2}
-                        className="stroke-zinc-600"
+                        className="stroke-zinc-300 dark:stroke-zinc-600"
                         strokeWidth={i % 3 === 0 ? "2" : "1"}
                       />
                     );
@@ -218,7 +218,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
                     y1="100"
                     x2={100 + 45 * Math.cos((hourDeg * Math.PI) / 180)}
                     y2={100 + 45 * Math.sin((hourDeg * Math.PI) / 180)}
-                    className="stroke-white"
+                    className="stroke-black dark:stroke-white"
                     strokeWidth="4"
                     strokeLinecap="round"
                   />
@@ -246,7 +246,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
                   />
 
                   {/* Center Pin */}
-                  <circle cx="100" cy="100" r="3" className="fill-white" />
+                  <circle cx="100" cy="100" r="3" className="fill-black dark:fill-white" />
 
                 </svg>
               )}
@@ -256,23 +256,23 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
       </div>
 
       {/* Smart Sleep & Bedtime Calculator Section */}
-      <div className="bg-transparent border border-white/5 rounded-3xl p-4 backdrop-blur-xl shrink-0">
+      <div className="bg-transparent border border-black/5 dark:border-white/5 rounded-3xl p-4 backdrop-blur-xl shrink-0">
         <div className="flex items-center gap-3 mb-4">
           <BedDouble className="w-5 h-5 text-zinc-500" />
-          <h3 className="text-base font-bold text-white">Smart Bedtime & Sleep Cycle Calculator</h3>
+          <h3 className="text-base font-bold text-zinc-900 dark:text-white">Smart Bedtime & Sleep Cycle Calculator</h3>
         </div>
         <p className="text-xs text-zinc-500 mb-6">
-          If you go to sleep <span className="text-white font-bold">right now</span>, set your alarm for one of these wake-up times to align with 90-minute REM sleep cycles:
+          If you go to sleep <span className="text-zinc-900 dark:text-white font-bold">right now</span>, set your alarm for one of these wake-up times to align with 90-minute REM sleep cycles:
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
           {sleepTimes.map((item, idx) => (
             <div
               key={idx}
-              className="bg-white/5 border border-white/5 rounded-2xl p-3 md:p-4 text-center hover:bg-white/10 active:scale-95 transition-all cursor-pointer group"
+              className="bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-2xl p-3 md:p-4 text-center hover:bg-black/10 dark:hover:bg-white/10 active:scale-95 transition-all cursor-pointer group"
             >
               <div className="text-[10px] md:text-xs font-semibold text-zinc-500 mb-1">{item.hours} Hours <span className="hidden sm:inline">({item.cycles} cycles)</span></div>
-              <div className="text-xl sm:text-2xl font-bold text-zinc-300 group-hover:text-white transition-colors">
+              <div className="text-xl sm:text-2xl font-bold text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
                 {item.time}
               </div>
             </div>
