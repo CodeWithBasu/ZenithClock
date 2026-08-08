@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 interface RandomLetterSwapProps {
@@ -11,8 +11,6 @@ interface RandomLetterSwapProps {
   transition?: any;
 }
 
-const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$*";
-
 export function RandomLetterSwap({
   label,
   className = "",
@@ -20,53 +18,44 @@ export function RandomLetterSwap({
   staggerDuration = 0.02,
   transition = { duration: 0.65, type: "spring" }
 }: RandomLetterSwapProps) {
-  const [displayText, setDisplayText] = useState(label);
-  const [isHovering, setIsHovering] = useState(false);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    
-    if (isHovering) {
-      let iteration = 0;
-      interval = setInterval(() => {
-        setDisplayText((current) =>
-          label
-            .split("")
-            .map((letter, index) => {
-              if (letter === " ") return " ";
-              
-              const progress = reverse ? (label.length - 1 - index) : index;
-              if (progress < iteration) {
-                return label[index];
-              }
-              return ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
-            })
-            .join("")
-        );
-        
-        if (iteration >= label.length) {
-          clearInterval(interval);
-        }
-        
-        // At 50ms per tick (0.05s), increment iteration so it takes staggerDuration per letter
-        iteration += 0.015 / staggerDuration; 
-      }, 50);
-    } else {
-      setDisplayText(label);
-    }
-
-    return () => clearInterval(interval);
-  }, [isHovering, label, staggerDuration, reverse]);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.span
-      className={className}
-      onHoverStart={() => setIsHovering(true)}
-      onHoverEnd={() => setIsHovering(false)}
-      transition={transition}
-      style={{ display: 'inline-block' }}
+      className={`inline-flex overflow-hidden ${className}`}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
     >
-      {displayText}
+      {label.split("").map((char, i) => {
+        const displayChar = char === " " ? "\u00A0" : char;
+        
+        return (
+          <span key={i} className="relative inline-block overflow-hidden">
+            <motion.span
+              className="inline-block"
+              initial={{ y: 0 }}
+              animate={{ y: isHovered ? (reverse ? "100%" : "-100%") : 0 }}
+              transition={{
+                ...transition,
+                delay: i * staggerDuration,
+              }}
+            >
+              {displayChar}
+            </motion.span>
+            <motion.span
+              className="absolute left-0 top-0 inline-block"
+              initial={{ y: reverse ? "-100%" : "100%" }}
+              animate={{ y: isHovered ? 0 : (reverse ? "-100%" : "100%") }}
+              transition={{
+                ...transition,
+                delay: i * staggerDuration,
+              }}
+            >
+              {displayChar}
+            </motion.span>
+          </span>
+        );
+      })}
     </motion.span>
   );
 }
