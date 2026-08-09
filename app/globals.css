@@ -73,6 +73,10 @@
 .font-hud {
   font-family: var(--font-orbitron), sans-serif;
   color: transparent;
+  -webkit-text-stroke: 1.5px rgba(15, 23, 42, 0.8); /* zinc-900 */
+}
+
+.dark .font-hud {
   -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.8);
 }
 

@@ -76,8 +76,8 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
       {/* Clock Mode Controls */}
       <div className="flex flex-wrap items-center justify-between gap-4 bg-white/40 dark:bg-black/20 border border-black/5 dark:border-white/5 p-3 rounded-2xl backdrop-blur-md">
         <div className="flex items-center gap-2">
-          {isNight ? <Moon className="w-5 h-5 text-zinc-400" /> : <Sun className="w-5 h-5 text-zinc-400" />}
-          <span className="text-sm font-semibold text-zinc-300">
+          {isNight ? <Moon className="w-5 h-5 text-zinc-600 dark:text-zinc-400" /> : <Sun className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />}
+          <span className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
             {isNight ? 'Evening Atmosphere' : 'Daylight Mode'}
           </span>
         </div>
@@ -98,7 +98,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
                 className={`px-3 py-1 rounded-lg text-xs capitalize font-medium active:scale-95 transition-all ${
                   clockType === type
                     ? 'bg-black text-white dark:bg-white dark:text-black shadow-sm'
-                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                    : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
                 }`}
               >
                 {type}
@@ -118,8 +118,8 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
               clockType === 'both' ? 'lg:col-span-7' : 'lg:col-span-12'
             }`}
           >
-            <div className="flex items-center justify-center gap-2 mb-2 md:mb-4 text-zinc-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">
-              <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-zinc-500" /> Live Local Standard Time
+            <div className="flex items-center justify-center gap-2 mb-2 md:mb-4 text-zinc-500 dark:text-zinc-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">
+              <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-zinc-500 dark:text-zinc-400" /> Live Local Standard Time
             </div>
 
             {/* Time Digits */}
@@ -128,7 +128,7 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
                 {displayHours}:{displayMinutes}
               </span>
               <div className="flex flex-row sm:flex-col items-center sm:items-start gap-2 sm:gap-1 mt-2 sm:mt-0">
-                <span className="text-3xl sm:text-4xl font-medium text-zinc-400">
+                <span className="text-3xl sm:text-4xl font-medium text-zinc-600 dark:text-zinc-400">
                   :{displaySeconds}
                 </span>
                 {format12h && (
@@ -140,14 +140,14 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
             </div>
 
             {/* Date Badge */}
-            <div className="inline-flex items-center justify-center gap-2 px-5 py-2 mt-4 md:mt-0 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-zinc-600 dark:text-zinc-300 text-xs md:text-sm font-medium mx-auto">
+            <div className="inline-flex items-center justify-center gap-2 px-5 py-2 mt-4 md:mt-0 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-zinc-700 dark:text-zinc-300 text-xs md:text-sm font-medium mx-auto">
               <Calendar className="w-4 h-4 text-zinc-500" />
               {dateString}
             </div>
 
             {/* Day Progress Bar */}
             <div className="mt-4 pt-4 border-t border-black/5 dark:border-white/5">
-              <div className="flex justify-between text-xs text-zinc-500 mb-2 font-medium">
+              <div className="flex justify-between text-xs text-zinc-600 dark:text-zinc-500 mb-2 font-medium">
                 <span>Day Progress</span>
                 <span className="text-zinc-900 dark:text-white font-bold">{dayProgressPercent}%</span>
               </div>
@@ -168,8 +168,8 @@ export default function ClockSection({ format12h, setFormat12h }: ClockSectionPr
               clockType === 'both' ? 'lg:col-span-5' : 'lg:col-span-12'
             }`}
           >
-            <h3 className="text-[10px] md:text-xs font-bold tracking-widest text-zinc-500 uppercase mb-4 md:mb-6 flex items-center gap-2">
-              <ClockIcon className="w-4 h-4 text-zinc-600" /> Analog Dial
+            <h3 className="text-[10px] md:text-xs font-bold tracking-widest text-zinc-600 dark:text-zinc-500 uppercase mb-4 md:mb-6 flex items-center gap-2">
+              <ClockIcon className="w-4 h-4 text-zinc-600 dark:text-zinc-500" /> Analog Dial
             </h3>
 
             {/* SVG Analog Clock */}
