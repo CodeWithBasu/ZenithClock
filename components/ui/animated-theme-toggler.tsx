@@ -9,49 +9,36 @@ import { motion, AnimatePresence } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
+import { useTheme } from "next-themes"
+
 type AnimatedThemeTogglerProps = {
   className?: string
 }
 
 export const AnimatedThemeToggler = ({ className }: AnimatedThemeTogglerProps) => {
+  const { theme, setTheme, resolvedTheme } = useTheme()
   const buttonRef = useRef<HTMLButtonElement>(null)
   const [mounted, setMounted] = useState(false)
-  const [darkMode, setDarkMode] = useState(true)
 
   useEffect(() => {
     setMounted(true)
-    const isDark = document.documentElement.classList.contains("dark")
-    setDarkMode(isDark)
-
-    const syncTheme = () =>
-      setDarkMode(document.documentElement.classList.contains("dark"))
-
-    const observer = new MutationObserver(syncTheme)
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    })
-    return () => observer.disconnect()
   }, [])
 
   const onToggle = useCallback(async () => {
     if (!buttonRef.current) return
 
+    const isDark = resolvedTheme === "dark"
+    const nextTheme = isDark ? "light" : "dark"
+
     // If browser doesn't support view transitions, fallback gracefully
     if (!document.startViewTransition) {
-        const toggled = !darkMode
-        setDarkMode(toggled)
-        document.documentElement.classList.toggle("dark", toggled)
-        localStorage.setItem("theme", toggled ? "dark" : "light")
+        setTheme(nextTheme)
         return
     }
 
     await document.startViewTransition(() => {
       flushSync(() => {
-        const toggled = !darkMode
-        setDarkMode(toggled)
-        document.documentElement.classList.toggle("dark", toggled)
-        localStorage.setItem("theme", toggled ? "dark" : "light")
+        setTheme(nextTheme)
       })
     }).ready
 
@@ -76,7 +63,7 @@ export const AnimatedThemeToggler = ({ className }: AnimatedThemeTogglerProps) =
         pseudoElement: "::view-transition-new(root)",
       }
     )
-  }, [darkMode])
+  }, [resolvedTheme, setTheme])
 
   // Prevent hydration mismatch by returning a placeholder or empty container on the server
   if (!mounted) {
@@ -106,7 +93,7 @@ export const AnimatedThemeToggler = ({ className }: AnimatedThemeTogglerProps) =
       type="button"
     >
       <AnimatePresence mode="wait" initial={false}>
-        {darkMode ? (
+        {resolvedTheme === "dark" ? (
           <motion.span
             key="sun-icon"
             initial={{ opacity: 0, scale: 0.55, rotate: 25 }}
