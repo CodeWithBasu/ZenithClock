@@ -177,7 +177,7 @@ export default function TimerSection() {
       {/* Scrollable Content */}
       <div className="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar">
         {/* Main Grid: Timer Display + Settings */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 items-start">
         {timers.map((t) => {
           const progress = ((t.totalSeconds - t.remainingSeconds) / t.totalSeconds) * 100;
           const isDone = t.remainingSeconds === 0;
