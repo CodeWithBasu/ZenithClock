@@ -109,7 +109,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="h-screen overflow-hidden text-zinc-900 dark:text-[#FFE5F1] relative font-sans selection:bg-black dark:selection:bg-white selection:text-white dark:selection:text-[#010030] flex flex-col bg-white dark:bg-transparent">
+    <main className="h-screen overflow-hidden text-zinc-900 dark:text-[#FFE5F1] relative font-sans selection:bg-black dark:selection:bg-white selection:text-white dark:selection:text-[#010030] flex flex-col bg-transparent">
       {/* HTML5 Canvas Ambient Particle Background */}
       <DynamicBackground theme={theme} />
       <CanvasCursor />
